@@ -1,4 +1,5 @@
 <img width="1063" alt="Screenshot 2023-08-13 152456" src="https://github.com/bilalyusuf973/StoryMedia/assets/111658408/82e926d8-bdf3-4591-8ce8-15a1c94c2e76">
+<img width="279" alt="Screenshot 2023-08-13 153421" src="https://github.com/bilalyusuf973/StoryMedia/assets/111658408/67175ca8-a93c-4955-93be-46d8b836b34d">
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
