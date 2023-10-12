@@ -1,105 +1,54 @@
 'use client'
-import React, { useState } from 'react'
-import Navbar from '@/components/Navbar'
-import Post from '@/components/Post'
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined';
-import VideocamOutlinedIcon from '@mui/icons-material/VideocamOutlined';
-import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import { Avatar, Badge } from '@mui/material'
+import React, { useEffect, useContext, ReactNode } from 'react'
+import Link from 'next/link'
+import {DarkModeContext, DarkModeInterface } from './context/theme/ThemeContext'
 
+const Homepage = () => {
+  const { darkMode }: DarkModeInterface = useContext(DarkModeContext) || { darkMode: true, toggleDarkMode: () => {} };
 
+  useEffect(() => {
+    if(localStorage.darkTheme === 'Enabled' || (!('darkTheme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)){
+      document.documentElement.classList.add('dark');
+    //   document.querySelector(".darkThemeIcon")?.classList.add('hidden');
+    //   document.querySelector(".lightThemeIcon")?.classList.remove('hidden');
+    // }
+    // else{
+    //   document.documentElement.classList.remove('dark');
+    //   document.querySelector(".darkThemeIcon")?.classList.remove('hidden');
+    //   document.querySelector(".lightThemeIcon")?.classList.add('hidden');
+    }
+  }, [darkMode])
 
-export default function Home() {
-  const [posts, setPosts] = useState(['', '', '', '', ''])
   return (
-    <div className='homepapge'>
-      <Navbar/>
-      <div className="flex">
-        <div className="leftBar hidden md:block bg-white dark:bg-[#000000] w-fit">
-          <div className='flex sticky top-[100px] flex-col xl:ml-[6vw] xl:mr-[3vw] gap-y-[5px]'>
-            <div className='cursor-pointer hover:bg-[#d5d5d5] dark:hover:bg-[#1c1c1c] rounded-[20px] flex items-center justify-center xl:justify-start p-2 group'>
-              <div className='content-center w-[36px] h-[36px]'>
-                <HomeRoundedIcon className='text-[32px] group-hover:text-[36px]'/>
-              </div>
-              <span className='hidden xl:inline text-[18px] ml-[8px] mr-[3vw]'>Home</span>
-            </div>
-            <div className='cursor-pointer hover:bg-[#d5d5d5] dark:hover:bg-[#1c1c1c] rounded-[20px] flex items-center justify-center xl:justify-start p-2 group'>
-              <div className='content-center w-[36px] h-[36px]'>
-                <ExploreOutlinedIcon className='text-[32px] group-hover:text-[36px]'/>
-              </div>
-              <span className='hidden xl:inline text-[18px] ml-[8px] mr-[3vw]'>Explore</span>
-            </div>
-            <div className='cursor-pointer hover:bg-[#d5d5d5] dark:hover:bg-[#1c1c1c] rounded-[20px] flex items-center justify-center xl:justify-start p-2 group'>
-              <div className='content-center w-[36px] h-[36px]'>
-                <VideocamOutlinedIcon className='text-[32px] group-hover:text-[36px]'/>
-              </div>
-              <span className='hidden xl:inline text-[18px] ml-[8px] mr-[3vw]'>Videos</span>
-            </div>
-            <div className='cursor-pointer hover:bg-[#d5d5d5] dark:hover:bg-[#1c1c1c] rounded-[20px] flex items-center justify-center xl:justify-start p-2 group'>
-              <div className='content-center w-[36px] h-[36px]'>
-                <SendOutlinedIcon className='text-[28px] group-hover:text-[32px] -rotate-[33deg]'/>
-              </div>
-              <span className='hidden xl:inline text-[18px] ml-[8px] mr-[3vw]'>Messages</span>
-            </div>
-            <div className='cursor-pointer hover:bg-[#d5d5d5] dark:hover:bg-[#1c1c1c] rounded-[20px] flex items-center justify-center xl:justify-start p-2 group'>
-              <div className='content-center w-[36px] h-[36px]'>
-                <FavoriteBorderOutlinedIcon className='text-[32px] group-hover:text-[36px]'/>
-              </div>
-              <span className='hidden xl:inline text-[18px] ml-[8px] mr-[3vw]'>Notifications</span>
-            </div>
-            <div className='cursor-pointer hover:bg-[#d5d5d5] dark:hover:bg-[#1c1c1c] rounded-[20px] flex items-center justify-center xl:justify-start p-2 group'>
-              <div className='content-center w-[36px] h-[36px]'>
-                <AddCircleOutlineOutlinedIcon className='text-[32px] group-hover:text-[36px]'/>
-              </div>
-              <span className='hidden xl:inline text-[18px] ml-[8px] mr-[3vw]'>Create</span>
-            </div>
-            <div className='cursor-pointer hover:bg-[#d5d5d5] dark:hover:bg-[#1c1c1c] rounded-[20px] flex items-center justify-center xl:justify-start p-2 group'>
-              <div className='content-center w-[36px] h-[36px]'>
-                <PersonOutlineOutlinedIcon className='text-[32px] group-hover:text-[36px]'/>
-              </div>
-              <span className='hidden xl:inline text-[18px] ml-[8px] mr-[3vw]'>Profile</span>
-            </div>
-            <div className='cursor-pointer px-2 xl:px-0 font-semibold text-white'>
-              <span className='w-full px-2 py-3 rounded-[20px] content-center bg-blue-600 hover:bg-blue-800'>Post</span>
-            </div>
+    <div className="absolute top-0 bottom-0 left-0 right-0 flex p-8 justify-center lg:justify-around items-center flex-col lg:flex-row">
+      <div className=''>
+        <img src="brandIcon.png" alt="Icon" className='w-[50px] h-[50px] lg:w-[320px] lg:h-[320px]'/>
+      </div>
+      <div className='flex flex-col'>
+        <div className='text-5xl md:text-7xl font-bold mb-12 mt-7'>Happening now</div>
+        <div className='text-2xl md:text-3xl font-bold mb-3'>Join today.</div>
+        <div className='w-[280px]'>
+          <div className='cursor-pointer content-center bg-white hover:bg-[#efefef] text-[#272727d3] text-[15px] font-semibold rounded-[25px] my-3 p-2 border border-gray-400'>
+            <svg className='mx-1' xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/><path d="M1 1h22v22H1z" fill="none"/></svg>
+            <span>Sign up with Google</span>
           </div>
-          <div className="profileSection flex justify-center sticky top-[48rem] xl:ml-[6vw] xl:mr-[10px] p-2 cursor-pointer rounded-[20px] hover:bg-[#d5d5d5] dark:hover:bg-[#1c1c1c]">
-            <Avatar alt="" src="" sx={{width: 45, height: 45}}/>
-            <div className='hidden xl:flex justify-between items-center w-full ml-2'>
-              <div className='flex flex-col leading-[20px]'>
-                <span className='font-semibold'>Name</span>
-                <span className='text-[#afafafbe]'>@username</span>
-              </div>
-              <div className='font-extrabold text-xl mb-[7px]'>...</div>
-            </div>
+          <div className='cursor-pointer content-center bg-white hover:bg-[#d1d1d1] text-[#272727] text-[15px] font-semibold rounded-[25px] my-3 p-2 border border-gray-400'>
+            <svg className='mx-1' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="24" height="24"><path d="M25.565,9.785c-0.123,0.077-3.051,1.702-3.051,5.305c0.138,4.109,3.695,5.55,3.756,5.55 c-0.061,0.077-0.537,1.963-1.947,3.94C23.204,26.283,21.962,28,20.076,28c-1.794,0-2.438-1.135-4.508-1.135 c-2.223,0-2.852,1.135-4.554,1.135c-1.886,0-3.22-1.809-4.4-3.496c-1.533-2.208-2.836-5.673-2.882-9 c-0.031-1.763,0.307-3.496,1.165-4.968c1.211-2.055,3.373-3.45,5.734-3.496c1.809-0.061,3.419,1.242,4.523,1.242 c1.058,0,3.036-1.242,5.274-1.242C21.394,7.041,23.97,7.332,25.565,9.785z M15.001,6.688c-0.322-1.61,0.567-3.22,1.395-4.247 c1.058-1.242,2.729-2.085,4.17-2.085c0.092,1.61-0.491,3.189-1.533,4.339C18.098,5.937,16.488,6.872,15.001,6.688z"/></svg>
+            <span>Sign up with Apple</span>
           </div>
+          <div className='content-center'>
+            <div className='h-[1px] bg-gray-300 w-full mx-2'></div>
+            <div className='text-[14px]'>or</div>
+            <div className='h-[1px] bg-gray-300 w-full mx-2'></div>
+          </div>
+          <div className='cursor-pointer content-center bg-[#38a9ff] hover:bg-[#3e8cc8] text-white text-[15px] font-semibold rounded-[25px] my-3 p-2'>Create Account</div>
+          <div className='text-[11px] text-[#b4b4b4]'>By signing up, you agree to the <Link href="/" className='text-[#569aff] hover:underline'>Terms of Service</Link> and <Link href="/" className='text-[#569aff] hover:underline'>Privacy Policy</Link>, including <Link href="/" className='text-[#569aff] hover:underline'>Cookie Use.</Link></div>
+          <div className='text-[16px] font-semibold mt-[50px] mb-3'>Already have an account?</div>
+          <div className='cursor-pointer content-center dark:bg-[#000000] hover:bg-[#70a4f823] dark:hover:bg-[#70a4f823] text-[#569aff] text-[15px] font-semibold rounded-[25px] p-2 border border-gray-400'>Sign in</div>
         </div>
-        <div className="middleBar group w-full xl:w-[43vw] md:border-x-[1px] content-center flex-col border-[#757575be] pt-[100px]">
-          <div className="stories"></div>
-          <div className="thoughts flex border-y-[1px] border-[#757575be] w-full">
-            <div className='hidden md:block'>
-              <Avatar alt="" src="" sx={{width: 54, height: 54, margin: "12px 10px 0 10px", cursor:"pointer"}}/>
-            </div>
-            <div className='flex flex-col w-full mx-2'>
-              <input type="text" className=' h-20 text-[20px] dark:bg-inherit outline-none border-none' placeholder="What's happening...?"/>
-              <div className='flex items-center justify-between my-1'>
-                <div className="thoughtsIcons"></div>
-                <div className="postBtn cursor-pointer content-center bg-blue-600 hover:bg-blue-800 text-white rounded-3xl py-2 px-5 font-bold text-sm">Post</div>
-              </div>
-            </div>
-          </div>
-          <div className="posts content-center flex-col">
-            {posts.map((post, index) => {
-              return <Post key={post}/>
-            })}
-          </div>
-        </div>
-        <div className="rightBar xl:hidden"></div>
       </div>
     </div>
   )
 }
+
+export default Homepage

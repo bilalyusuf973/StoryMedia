@@ -1,11 +1,12 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import ThemeContext from '@/app/context/theme/ThemeContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Story Media',
+  title: 'NetVibes',
   description: 'It is a social media web app created using next.js',
 }
 
@@ -16,7 +17,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className + " " + 'bg-[#fff] dark:bg-[#000000] dark:text-white'}>{children}</body>
+        <body className={inter.className + " " + 'dark:bg-[#000000] dark:text-white'}>
+          <ThemeContext>
+            {children}
+          </ThemeContext>
+        </body>
     </html>
   )
 }

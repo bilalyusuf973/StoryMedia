@@ -58,5 +58,5 @@ body{
 
 .menu{
     box-shadow: var(--shadow);
-    padding: 6vh 0;
+    padding: 25px;
 }

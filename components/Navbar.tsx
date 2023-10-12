@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
@@ -13,13 +13,24 @@ import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import {DarkModeContext, DarkModeInterface } from '@/app/context/theme/ThemeContext'
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+// import { useRouter } from 'next/router';
+import { Avatar } from '@mui/material'
 
 const Navbar = () => {
-  const [theme, setTheme] = useState('light');
-  const [menuState, setMenuState] = useState(false)
+  const { darkMode, toggleDarkMode }: DarkModeInterface = useContext(DarkModeContext) || { darkMode: false, toggleDarkMode: () => {} };
+  const [menuState, setMenuState] = useState(false);
+  // const router = useRouter();
+
+  // useEffect(() => {
+  //   if(!('NetvibesAuthToken' in localStorage)){
+  //     router.push('/');
+  //   }
+  // }, [])
 
   useEffect(() => {
-    if(theme === 'dark'){
+    if(localStorage.darkTheme === 'Enabled' || (!('darkTheme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)){
       document.documentElement.classList.add('dark');
       document.querySelector(".darkThemeIcon")?.classList.add('hidden');
       document.querySelector(".lightThemeIcon")?.classList.remove('hidden');
@@ -29,7 +40,7 @@ const Navbar = () => {
       document.querySelector(".darkThemeIcon")?.classList.remove('hidden');
       document.querySelector(".lightThemeIcon")?.classList.add('hidden');
     }
-  }, [theme])
+  }, [darkMode])
 
   useEffect(() => {
     if(menuState){
@@ -50,8 +61,8 @@ const Navbar = () => {
 
         <div className='left w-full md:w-fit flex items-center'>
           <Link href="/" className='content-center'>
-              <img src="socialMediaIcon.png" alt="Icon" className='brandImage w-[60px] h-[60px] md:w-[80px] md:h-[80px]'/>
-              <div className="hidden lg:block brandName">STORY<span className='ml-2 text-[#699cfa]'>MEDIA</span></div>
+              <img src="brandIcon.png" alt="Icon" className='brandImage ml-2 mr-4 w-[45px] h-[45px]'/>
+              <div className="hidden lg:block brandName">NET<span className='ml-1 text-[#699cfa]'>VIBES</span></div>
           </Link>
         </div>
 
@@ -60,32 +71,74 @@ const Navbar = () => {
             <div className='searchIconDiv content-center bg-[#d5d5d5] dark:bg-[#1c1c1c]'><SearchRoundedIcon className='cursor-pointer text-[30px] ml-[6px] mr-[6px]'/></div>
         </div>
 
-        <div className='right content-center mr-[10px]'> 
-          <DarkModeRoundedIcon className='darkThemeIcon cursor-pointer ml-2 mr-2 text-[30px]' onClick={() => {setTheme('dark')}}/>
-          <LightModeRoundedIcon className='lightThemeIcon cursor-pointer ml-2 mr-2 text-[30px]' onClick={() => {setTheme('light')}}/>
-          <div className='menuBtn content-center' onClick={() => {setMenuState(!menuState)}}>
-            <SearchRoundedIcon className='md:hidden cursor-pointer ml-2 mr-2 text-[30px]'/>
-            <MenuIcon className='openMenuIcon md:hidden cursor-pointer ml-2 mr-2 text-[30px]'/>
-            <CloseRoundedIcon className='closeMenuIcon md:hidden cursor-pointer ml-2 mr-2 text-[30px]'/>
+        <div className='right content-center mr-[5px]'> 
+          <DarkModeRoundedIcon className='darkThemeIcon cursor-pointer mx-1 text-[30px]' onClick={() => {toggleDarkMode()}}/>
+          <LightModeRoundedIcon className='lightThemeIcon cursor-pointer mx-1 text-[30px]' onClick={() => {toggleDarkMode()}}/>
+          <div className='md:hidden menuBtn content-center' onClick={() => {setMenuState(!menuState)}}>
+            <SearchRoundedIcon className='cursor-pointer mx-1 text-[30px]'/>
+            <MenuIcon className='openMenuIcon cursor-pointer mx-1 text-[30px]'/>
+            <CloseRoundedIcon className='closeMenuIcon cursor-pointer mx-1 text-[30px]'/>
+          </div>
+          <div className='xl:hidden mx-1'>
+            <Avatar alt="" src="" sx={{width:35, height:35, cursor:'pointer'}}/>
           </div>
         </div>
 
       </div>
-      <div className='menu md:hidden relative left-0 right-0 z-[99] opacity-1 dark:bg-[rgba(0,0,0,0.3)]'>
-        <ul className='content-center flex-col gap-y-6'>
+      <div className='menu md:hidden relative left-0 right-0 z-[99] backdrop-blur bg-[#ffffffad] dark:bg-[#000000]'>
+        <div className="search content-center mb-6">
+          <input type="text" autoComplete='off' className='searchBar w-full dark:bg-[#000000] text-[15px]' placeholder='Search...'/>
+          <div className='searchIconDiv content-center bg-[#d5d5d5] dark:bg-[#1c1c1c]'><SearchRoundedIcon className='cursor-pointer text-[25px] ml-1 mr-1'/></div>
+        </div>
+        <ul className='flex justify-center flex-col gap-y-6 font-semibold'>
           <li className='text-xl'>
-            <div className="search content-center">
-              <input type="text" autoComplete='off' className='searchBar w-[70vw] dark:bg-[#000000] text-[15px]' placeholder='Search...'/>
-              <div className='searchIconDiv content-center bg-[#d5d5d5] dark:bg-[#1c1c1c]'><SearchRoundedIcon className='cursor-pointer text-[25px] ml-1 mr-1'/></div>
+            <div className='flex items-center'>
+              <HomeRoundedIcon className='mx-3 text-[32px]'/>
+              <span>Home</span>
             </div>
           </li>
-          <li className='text-xl'>Home</li>
-          <li className='text-xl'>Explore</li>
-          <li className='text-xl'>Videos</li>
-          <li className='text-xl'>Messages</li>
-          <li className='text-xl'>Notifations</li>
-          <li className='text-xl'>Create</li>
-          <li className='text-xl'>Profile</li>
+          <li className='text-xl'>
+            <div className='flex items-center'>
+              <ExploreOutlinedIcon className='mx-3 text-[32px]'/>
+              <span>Explore</span>
+            </div>
+          </li>
+          <li className='text-xl'>
+            <div className='flex items-center'>
+              <VideocamOutlinedIcon className='mx-3 text-[32px]'/>
+              <span>Videos</span>
+            </div>
+          </li>
+          <li className='text-xl'>
+            <div className='flex items-center'>
+              <SendOutlinedIcon className='-rotate-[33deg] mx-3 text-[32px]'/>
+              <span>Messages</span>
+            </div>
+          </li>
+          <li className='text-xl'>
+            <div className='flex items-center'>
+              <FavoriteBorderOutlinedIcon className='mx-3 text-[32px]'/>
+              <span>Notifications</span>
+            </div>
+          </li>
+          <li className='text-xl'>
+            <div className='flex items-center'>
+              <AddCircleOutlineOutlinedIcon className='mx-3 text-[32px]'/>
+              <span>Create</span>
+            </div>
+          </li>
+          <li className='text-xl'>
+            <div className='flex items-center'>
+              <PersonOutlineOutlinedIcon className='mx-3 text-[32px]'/>
+              <span>Profile</span>
+            </div>
+          </li>
+          <li className='text-xl'>
+            <div className='flex items-center'>
+              <LogoutOutlinedIcon className='mx-3 text-[32px]'/>
+              <span>Logout</span>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
