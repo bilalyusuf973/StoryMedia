@@ -30,8 +30,17 @@ const Post = () => {
                 <BookmarkAddOutlinedIcon className='cursor-pointer'/>
             </div>
           </div>
-          <div className="postInfo text-sm flex flex-col">
-            <div className="liked">Liked by AB and others</div>
+          <div className="postInfo gap-y-1 text-sm flex flex-col">
+            <div className="liked text-[13px] flex items-center gap-x-1">
+              <span>Liked by</span>
+              <span className='font-semibold'>AB</span>
+              <span>and</span>
+              <span className='font-semibold'>others</span>
+            </div>
+            <div className='flex items-center'>
+              <span className='font-semibold text-1xl'>username</span>
+              <span className='mx-1'>caption</span>
+            </div>
             <div className="comments text-[gray]">View all comments</div>
             <div className="addComment my-2">Add comment</div>
           </div>

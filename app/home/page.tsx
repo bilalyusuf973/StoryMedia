@@ -14,7 +14,8 @@ import { Avatar, Badge } from '@mui/material'
 
 
 export default function Home() {
-  const [posts, setPosts] = useState(['', '', '', '', ''])
+  const [posts, setPosts] = useState(['', '', '', '', '']);
+  
   return (
     <div className='homepapge'>
       <Navbar/>

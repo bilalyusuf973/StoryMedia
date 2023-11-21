@@ -13,47 +13,13 @@ import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import {DarkModeContext, DarkModeInterface } from '@/app/context/theme/ThemeContext'
+import { useThemeContext } from '@/app/context/theme/ThemeContext'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
-// import { useRouter } from 'next/router';
 import { Avatar } from '@mui/material'
 
 const Navbar = () => {
-  const { darkMode, toggleDarkMode }: DarkModeInterface = useContext(DarkModeContext) || { darkMode: false, toggleDarkMode: () => {} };
+  const { theme, toggleTheme } = useThemeContext();
   const [menuState, setMenuState] = useState(false);
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   if(!('NetvibesAuthToken' in localStorage)){
-  //     router.push('/');
-  //   }
-  // }, [])
-
-  useEffect(() => {
-    if(localStorage.darkTheme === 'Enabled' || (!('darkTheme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)){
-      document.documentElement.classList.add('dark');
-      document.querySelector(".darkThemeIcon")?.classList.add('hidden');
-      document.querySelector(".lightThemeIcon")?.classList.remove('hidden');
-    }
-    else{
-      document.documentElement.classList.remove('dark');
-      document.querySelector(".darkThemeIcon")?.classList.remove('hidden');
-      document.querySelector(".lightThemeIcon")?.classList.add('hidden');
-    }
-  }, [darkMode])
-
-  useEffect(() => {
-    if(menuState){
-      document.querySelector(".openMenuIcon")?.classList.add('hidden');
-      document.querySelector(".closeMenuIcon")?.classList.remove('hidden')
-      document.querySelector(".menu")?.classList.remove('hidden')
-    }
-    else{
-      document.querySelector(".openMenuIcon")?.classList.remove('hidden');
-      document.querySelector(".closeMenuIcon")?.classList.add('hidden');
-      document.querySelector(".menu")?.classList.add('hidden');
-    }
-  },[menuState])
 
   return (
     <div className='w-full fixed z-[1000]'>
@@ -72,12 +38,12 @@ const Navbar = () => {
         </div>
 
         <div className='right content-center mr-[5px]'> 
-          <DarkModeRoundedIcon className='darkThemeIcon cursor-pointer mx-1 text-[30px]' onClick={() => {toggleDarkMode()}}/>
-          <LightModeRoundedIcon className='lightThemeIcon cursor-pointer mx-1 text-[30px]' onClick={() => {toggleDarkMode()}}/>
+          { theme === "light" ? <DarkModeRoundedIcon className='darkThemeIcon cursor-pointer mx-1 text-[30px]' onClick={() => {toggleTheme()}}/> : 
+          <LightModeRoundedIcon className='lightThemeIcon cursor-pointer mx-1 text-[30px]' onClick={() => {toggleTheme()}}/>}
           <div className='md:hidden menuBtn content-center' onClick={() => {setMenuState(!menuState)}}>
             <SearchRoundedIcon className='cursor-pointer mx-1 text-[30px]'/>
-            <MenuIcon className='openMenuIcon cursor-pointer mx-1 text-[30px]'/>
-            <CloseRoundedIcon className='closeMenuIcon cursor-pointer mx-1 text-[30px]'/>
+            {menuState ? <CloseRoundedIcon className='closeMenuIcon cursor-pointer mx-1 text-[30px]'/> : 
+            <MenuIcon className='openMenuIcon cursor-pointer mx-1 text-[30px]'/>}
           </div>
           <div className='xl:hidden mx-1'>
             <Avatar alt="" src="" sx={{width:35, height:35, cursor:'pointer'}}/>
@@ -85,7 +51,7 @@ const Navbar = () => {
         </div>
 
       </div>
-      <div className='menu md:hidden relative left-0 right-0 z-[99] backdrop-blur bg-[#ffffffad] dark:bg-[#000000]'>
+      {menuState && <div className='menu md:hidden relative left-0 right-0 z-[99] backdrop-blur bg-[#ffffffad] dark:bg-[#000000]'>
         <div className="search content-center mb-6">
           <input type="text" autoComplete='off' className='searchBar w-full dark:bg-[#000000] text-[15px]' placeholder='Search...'/>
           <div className='searchIconDiv content-center bg-[#d5d5d5] dark:bg-[#1c1c1c]'><SearchRoundedIcon className='cursor-pointer text-[25px] ml-1 mr-1'/></div>
@@ -140,7 +106,7 @@ const Navbar = () => {
             </div>
           </li>
         </ul>
-      </div>
+      </div>}
     </div>
   )
 }
