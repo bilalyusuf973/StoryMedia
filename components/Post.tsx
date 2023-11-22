@@ -38,7 +38,7 @@ const Post = () => {
               <span className='font-semibold'>others</span>
             </div>
             <div className='flex items-center'>
-              <span className='font-semibold text-1xl'>username</span>
+              <span className='font-semibold'>username</span>
               <span className='mx-1'>caption</span>
             </div>
             <div className="comments text-[gray]">View all comments</div>
