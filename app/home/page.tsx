@@ -8,7 +8,7 @@ import RightBar from '@/components/RightBar'
 
 export default function Home() {
   return (
-    <div className='homepapge'>
+    <div className='homepapge w-full h-full'>
       <Navbar/>
       <div className="flex">
         <LeftBar/>

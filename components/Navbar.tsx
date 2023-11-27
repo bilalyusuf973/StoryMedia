@@ -1,9 +1,10 @@
 'use client'
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState } from 'react'
+import Link from 'next/link';
+import { useThemeContext } from '@/app/contexts/ThemeContext'
 import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
-import Link from 'next/link';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
@@ -13,7 +14,6 @@ import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import { useThemeContext } from '@/app/contexts/ThemeContext'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { Avatar } from '@mui/material';
 
@@ -53,15 +53,15 @@ export default function Navbar() {
             <div className='searchIconDiv content-center bg-[#d5d5d5] dark:bg-[#1c1c1c]'><SearchRoundedIcon sx={{ fontSize: 30 }} className='cursor-pointer ml-[6px] mr-[6px]'/></div>
         </div>
 
-        <div className='right content-center mr-[5px]'> 
-          { theme === "light" ? <DarkModeRoundedIcon sx={{ fontSize: 30 }} className='darkThemeIcon cursor-pointer mx-1' onClick={() => {toggleTheme()}}/> : 
-          <LightModeRoundedIcon sx={{ fontSize: 30 }} className='lightThemeIcon cursor-pointer mx-1' onClick={() => {toggleTheme()}}/>}
-          <div className='md:hidden menuBtn content-center' onClick={() => {setMenuState(!menuState)}}>
-            <SearchRoundedIcon sx={{ fontSize: 30 }} className='cursor-pointer mx-1'/>
-            {menuState ? <CloseRoundedIcon sx={{ fontSize: 30 }} className='closeMenuIcon cursor-pointer mx-1'/> : 
-            <MenuIcon sx={{ fontSize: 30 }} className='openMenuIcon cursor-pointer mx-1'/>}
+        <div className='right content-center gap-x-1 mr-2'>
+          { theme === "light" ? <DarkModeRoundedIcon sx={{ fontSize: 30 }} className='darkThemeIcon cursor-pointer' onClick={() => {toggleTheme()}}/> : 
+          <LightModeRoundedIcon sx={{ fontSize: 30 }} className='lightThemeIcon cursor-pointer' onClick={() => {toggleTheme()}}/>}
+          <div className='md:hidden menuBtn content-center gap-x-1' onClick={() => {setMenuState(!menuState)}}>
+            <SearchRoundedIcon sx={{ fontSize: 30 }} className='cursor-pointer'/>
+            {menuState ? <CloseRoundedIcon sx={{ fontSize: 30 }} className='closeMenuIcon cursor-pointer'/> : 
+            <MenuIcon sx={{ fontSize: 30 }} className='openMenuIcon cursor-pointer'/>}
           </div>
-          <div className='xl:hidden mx-1'>
+          <div className='xl:hidden'>
             <Avatar alt="" src="" sx={{width:35, height:35, cursor:'pointer'}}/>
           </div>
         </div>

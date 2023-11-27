@@ -2,6 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ThemeContextProvider } from '@/app/contexts/ThemeContext'
+import { ModalContextProvider } from './contexts/ModalContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,9 +18,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-        <body className={inter.className + " " + 'dark:bg-[#000000] dark:text-white'}>
+        <body className={inter.className + " " + 'dark:bg-[#000000] dark:text-white min-h-screen'}>
           <ThemeContextProvider>
+            <ModalContextProvider>
             {children}
+            </ModalContextProvider>
           </ThemeContextProvider>
         </body>
     </html>

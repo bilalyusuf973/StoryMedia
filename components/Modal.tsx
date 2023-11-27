@@ -1,43 +1,19 @@
-import React, { useCallback } from 'react'
-import CloseIcon from '@mui/icons-material/Close';
+'use client'
+import React from 'react'
+import { useModalContext } from '@/app/contexts/ModalContext';
 
 type ModalProps = {
-    isOpen?: boolean;
-    onClose: () => void;
-    onSubmit: () => void;
-    title?: string;
-    body?: React.ReactElement;
-    footer?: React.ReactElement;
-    actionLabel: string;
-    disabled?: boolean;
+    body: React.JSX.Element;
 }
 
-const Modal: React.FC<ModalProps> = ({isOpen, onClose, onSubmit, title, body, footer, actionLabel, disabled}) => {
-
-  const handleClose = useCallback(() => {
-    if(disabled) return;
-
-    onClose();
-  },[disabled, onClose]);
-
-  const handleSubmit = useCallback(() => {
-    if(disabled) return;
-
-    onSubmit();
-  },[disabled, onSubmit]);
+const Modal: React.FC<ModalProps> = ({ body }) => {
+  const { isModal } = useModalContext();
   
   return (
     <>
-        {true && <div className='fixed content-center z-20 overflow-x-hidden overflow-y-auto w-full h-full bg-neutral-800 bg-opacity-70'>
-            <div className='relative mx-auto w-full md:w-3/6 h-full'>
-                <div className='flex flex-col bg-white dark:bg-[#000000] w-full h-full rounded-md shadow-md'>
-                  <div className="ModalHeader flex items-center justify-between">
-                    <span></span>
-                    <span><CloseIcon/></span>
-                  </div>
-                  <div className="ModalBody"></div>
-                  <div className="ModalFooter"></div>
-                </div>
+        {isModal && <div className='fixed w-full h-full content-center z-50 bg-neutral-800 bg-opacity-70'>
+            <div className='w-full md:w-[38rem] h-full md:h-auto md:max-h-[calc(100vh-5vh)] dark:bg-black md:rounded-2xl overflow-y-auto'>
+              {body}
             </div>
         </div>}
     </>
