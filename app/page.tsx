@@ -51,10 +51,10 @@ const Homepage = () => {
               <div className='text-[14px]'>or</div>
               <div className='h-[1px] bg-gray-300 w-full mx-2'></div>
             </div>
-            <div className='div11234 cursor-pointer content-center bg-[#38a9ff] hover:bg-[#3e8cc8] text-white text-[15px] font-semibold rounded-[25px] my-3 p-2' onClick={showRegisterModal}>Create Account</div>
+            <div className='div11234 cursor-pointer content-center bg-blue-600 hover:bg-blue-800 text-white text-[15px] font-semibold rounded-[25px] my-3 p-2' onClick={showRegisterModal}>Create Account</div>
             <div className='div11235 text-[11px] text-[#b4b4b4]'>By signing up, you agree to the <Link href="/" className='text-[#569aff] hover:underline'>Terms of Service</Link> and <Link href="/" className='text-[#569aff] hover:underline'>Privacy Policy</Link>, including <Link href="/" className='text-[#569aff] hover:underline'>Cookie Use.</Link></div>
             <div className='div11236 text-[16px] font-semibold mt-[50px] mb-3'>Already have an account?</div>
-            <div className='div11237 cursor-pointer content-center dark:bg-[#000000] hover:bg-[#70a4f823] dark:hover:bg-[#70a4f823] text-[#569aff] text-[15px] font-semibold rounded-[25px] p-2 border border-gray-400' onClick={showLoginModal}>Sign in</div>
+            <div className='div11237 cursor-pointer content-center hover:bg-[#70a4f823] text-blue-600 text-[15px] font-semibold rounded-[25px] p-2 border border-gray-400' onClick={showLoginModal}>Sign in</div>
           </div>
         </div>
       </div>

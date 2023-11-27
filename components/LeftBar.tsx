@@ -50,16 +50,16 @@ export default function LeftBar() {
           <div className='font-extrabold text-xl mb-[7px]'>...</div>
         </div>
       </div>
-      {showLogout && <div className='absolute bottom-[85px] left-[80px] flex flex-col'>
-        <div className='bg-[#0b0b0b] rounded-[20px] shadow-[0px_4px_15px_rgba(255,255,255,0.2)] border-[2px] w-[280px] border-neutral-800'>
+      {showLogout && <div className='hidden xl:flex absolute bottom-[85px] left-[80px] flex-col'>
+        <div className='w-[280px] bg-white dark:bg-[#0b0b0b] rounded-[20px] shadow-[0px_2px_15px_#a9a9a9] dark:shadow-[0px_2px_15px_rgb(255,255,255,0.3)]'>
           <div className='py-4'>
-            <div className='flex items-center gap-x-1 font-semibold px-5 py-2 hover:bg-[#1b1b1b] cursor-pointer'>
+            <div className='flex items-center gap-x-1 font-semibold px-5 py-2 hover:bg-[#dadada] dark:hover:bg-[#1b1b1b] cursor-pointer'>
               <span>Log out</span>
               <span>@username</span>
             </div>
           </div>
         </div>
-        <div className="absolute left-[130px] bottom-[-5px] w-0 h-0 border-l-[10px] border-l-transparent border-t-[12px] border-t-[#0b0b0b] border-r-[10px] border-r-transparent">
+        <div className="absolute left-[130px] bottom-[-8px] w-0 h-0 border-l-[10px] border-l-transparent border-t-[12px] border-t-white dark:border-t-[#0b0b0b] border-r-[10px] border-r-transparent">
         </div>
       </div>}
     </div>
