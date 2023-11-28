@@ -13,23 +13,24 @@ const Login: React.FC<any> = ( { setShowLogin } ) => {
   }
 
   const body = (
-    <div className='w-full h-full flex flex-col'>
-      <div className='sticky top-0 backdrop-blur-md p-4 flex flex-row-reverse bg-[#ffffffa6] dark:bg-[#000000a6] z-1000' onClick={onClose}>
+    <>
+      <div className='sticky top-0 backdrop-blur-md p-4 flex flex-row-reverse bg-[#ffffffa6] dark:bg-[#000000a6]' onClick={onClose}>
         <CloseIcon sx={{ fontSize: 23 }}/>
       </div>
-      <div className='flex flex-col h-auto px-1 pt-5 pb-14 w-full max-w-[350px] m-auto'>
-        <div className='font-bold text-3xl'>Login</div>
-        <div className='content-center flex-col mt-5 w-full max-w-[350px]'>
+      <div className='h-full flex'>
+        <div className='flex flex-col px-1 pb-10 w-full max-w-[350px] m-auto gap-y-3'>
+          <div className='font-bold text-3xl'>Login</div>
           <Input type='email' name='email' placeholder='Email Address'/>
           <Input type='password' name='password' placeholder='Password'/>
-        </div>
-        <div className="ModalFooter w-full max-w-[350px] content-center my-1">
           <button className='p-2 w-full rounded-full text-sm font-bold text-white bg-blue-600 hover:bg-blue-800'>
             Next
           </button>
+          <button className='p-2 w-full rounded-full text-sm font-bold border-[1px] border-gray-600'>
+            Forgot Password
+          </button>
         </div>
       </div>
-    </div>
+    </>
   );
 
   return (

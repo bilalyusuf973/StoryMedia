@@ -2,11 +2,12 @@
 import React, { useState } from 'react'
 import Link from 'next/link';
 import { useThemeContext } from '@/app/contexts/ThemeContext'
+import { useModalContext } from '@/app/contexts/ModalContext';
 import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import MenuIcon from '@mui/icons-material/Menu';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import CloseIcon from '@mui/icons-material/Close';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined';
 import VideocamOutlinedIcon from '@mui/icons-material/VideocamOutlined';
@@ -16,6 +17,7 @@ import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOu
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { Avatar } from '@mui/material';
+import Modal from './Modal';
 
 type NavbarMenuItemProps = {
   icon: React.JSX.Element;
@@ -24,7 +26,8 @@ type NavbarMenuItemProps = {
 
 export default function Navbar() {
   const { theme, toggleTheme } = useThemeContext();
-  const [menuState, setMenuState] = useState(false);
+  const { isModal, setIsModal } =  useModalContext();
+  const [showNavMenu, setShowNavMenu] = useState(false);
 
   const navbarMenuItemsData = [
     { icon: <HomeRoundedIcon sx={{ fontSize: 32 }} className='mx-3'/>, label: 'Home'},
@@ -37,57 +40,74 @@ export default function Navbar() {
     { icon: <LogoutOutlinedIcon sx={{ fontSize: 32 }} className='mx-3'/>, label: 'Logout'},
   ]
 
+  const openNavMenu = () => {
+    setShowNavMenu(true);
+    setIsModal(true);
+  }
+
+  const closeNavMenu = () => {
+    setShowNavMenu(false);
+    setIsModal(false);
+  }
+
   return (
-    <div className='w-full fixed z-[1000]'>
-      <div className='navbar relative w-full h-[65px] md:h-[75px] flex bg-white dark:bg-[#000000] justify-between items-center'>
-
-        <div className='left w-full md:w-fit flex items-center'>
-          <Link href="/" className='content-center'>
-              <img src="brandIcon.png" alt="Icon" className='brandImage ml-2 mr-4 w-[45px] h-[45px]'/>
-              <div className="hidden lg:block brandName">NET<span className='ml-1 text-[#699cfa]'>VIBES</span></div>
-          </Link>
-        </div>
-
-        <div className="search justify-center items-center hidden md:flex">
-            <input type="text" autoComplete='off' className='searchBar w-[30vw] dark:bg-[#000000]' placeholder='Search...'/>
-            <div className='searchIconDiv content-center bg-[#d5d5d5] dark:bg-[#1c1c1c]'><SearchRoundedIcon sx={{ fontSize: 30 }} className='cursor-pointer ml-[6px] mr-[6px]'/></div>
-        </div>
-
-        <div className='right content-center gap-x-1 mr-2'>
-          { theme === "light" ? <DarkModeRoundedIcon sx={{ fontSize: 30 }} className='darkThemeIcon cursor-pointer' onClick={() => {toggleTheme()}}/> : 
-          <LightModeRoundedIcon sx={{ fontSize: 30 }} className='lightThemeIcon cursor-pointer' onClick={() => {toggleTheme()}}/>}
-          <div className='md:hidden menuBtn content-center gap-x-1' onClick={() => {setMenuState(!menuState)}}>
-            <SearchRoundedIcon sx={{ fontSize: 30 }} className='cursor-pointer'/>
-            {menuState ? <CloseRoundedIcon sx={{ fontSize: 30 }} className='closeMenuIcon cursor-pointer'/> : 
-            <MenuIcon sx={{ fontSize: 30 }} className='openMenuIcon cursor-pointer'/>}
+    <>
+      {showNavMenu && isModal && <div className='md:hidden fixed w-full h-full content-center z-50 bg-neutral-800 bg-opacity-70'>
+        <div className='w-full h-full bg-white dark:bg-black overflow-auto'>
+          <div className='fixed top-0 z-[100] w-full flex flex-row-reverse backdrop-blur-md p-4 bg-[#ffffffa6] dark:bg-[#000000a6]' onClick={closeNavMenu}>
+            <CloseIcon sx={{ fontSize: 30 }}/>
           </div>
-          <div className='xl:hidden'>
-            <Avatar alt="" src="" sx={{width:35, height:35, cursor:'pointer'}}/>
+          <div className='min-w-[300px] mt-14 px-2 py-5 flex flex-col dark:bg-black gap-y-3'>
+            <div className="mb-2 h-[50px] flex rounded-full border-[1px] border-gray-600">
+              <input type="text" autoComplete='off' className='indent-5 w-[85%] rounded-tl-full rounded-bl-full border-r-[1px] border-gray-600 dark:bg-black outline-none text-xl' placeholder='Search...'/>
+              <div className='w-[15%] rounded-tr-full rounded-br-full content-center bg-[#d5d5d5] dark:bg-[#1c1c1c]'><SearchRoundedIcon sx={{ fontSize: 30 }} className='cursor-pointer ml-1 mr-1'/></div>
+            </div>
+            {navbarMenuItemsData.map(({icon, label}, index) => {
+              return <NavbarMenuItem key={index} icon={icon} label={label}/>
+            })}
           </div>
         </div>
-
-      </div>
-      {menuState && <div className='menu md:hidden relative left-0 right-0 z-[99] backdrop-blur bg-[#ffffffad] dark:bg-[#000000]'>
-        <div className="search content-center mb-6">
-          <input type="text" autoComplete='off' className='searchBar w-full dark:bg-[#000000] text-[15px]' placeholder='Search...'/>
-          <div className='searchIconDiv content-center bg-[#d5d5d5] dark:bg-[#1c1c1c]'><SearchRoundedIcon sx={{ fontSize: 30 }} className='cursor-pointer ml-1 mr-1'/></div>
-        </div>
-        <ul className='flex justify-center flex-col gap-y-6 font-semibold'>
-          {navbarMenuItemsData.map(({icon, label}, index) => {
-            return <NavbarMenuItem key={index} icon={icon} label={label}/>
-          })}
-        </ul>
       </div>}
-    </div>
+
+      <div className='w-full fixed z-10'>
+        <div className='navbar relative w-full h-[65px] md:h-[75px] flex bg-white dark:bg-[#000000] justify-between items-center'>
+
+          <div className='left w-full md:w-fit flex items-center'>
+            <Link href="/" className='content-center'>
+                <img src="brandIcon.png" alt="Icon" className='brandImage ml-2 md:ml-6 mr-4 w-[45px] h-[45px]'/>
+                <div className="hidden lg:block brandName">NET<span className='ml-1 text-[#699cfa]'>VIBES</span></div>
+            </Link>
+          </div>
+
+          <div className="search justify-center items-center hidden md:flex">
+              <input type="text" autoComplete='off' className='searchBar w-[30vw] dark:bg-[#000000]' placeholder='Search...'/>
+              <div className='searchIconDiv content-center bg-[#d5d5d5] dark:bg-[#1c1c1c]'><SearchRoundedIcon sx={{ fontSize: 30 }} className='cursor-pointer ml-[6px] mr-[6px]'/></div>
+          </div>
+
+          <div className='right content-center gap-x-1 mr-2'>
+            { theme === "light" ? <DarkModeRoundedIcon sx={{ fontSize: 30 }} className='darkThemeIcon cursor-pointer' onClick={() => {toggleTheme()}}/> : 
+            <LightModeRoundedIcon sx={{ fontSize: 30 }} className='lightThemeIcon cursor-pointer' onClick={() => {toggleTheme()}}/>}
+            <div className='md:hidden menuBtn content-center gap-x-1' onClick={openNavMenu}>
+              <SearchRoundedIcon sx={{ fontSize: 30 }} className='cursor-pointer'/>
+              <MenuIcon sx={{ fontSize: 30 }} className='openMenuIcon cursor-pointer'/>
+            </div>
+            <div className='xl:hidden'>
+              <Avatar alt="" src="" sx={{width:35, height:35, cursor:'pointer'}}/>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </>
   )
 }
 
 export const NavbarMenuItem: React.FC<NavbarMenuItemProps> = ({icon, label}) => {
   return (           
-    <li className='text-xl'>
+    <div className='py-2 font-semibold text-xl'>
       <div className='flex items-center'>
         {icon}
         <span>{label}</span>
       </div>
-    </li>
+    </div>
 )}

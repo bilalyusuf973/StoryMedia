@@ -69,7 +69,7 @@ export default function LeftBar() {
 export const MenuItem: React.FC<MenuItemProps> = ({icon, label}) => {
   return (
     <div className='cursor-pointer hover:bg-[#d5d5d5] dark:hover:bg-[#1c1c1c] rounded-[20px] content-center xl:justify-start p-2 group'>
-      <div className='content-center w-[36px] h-[36px]'>{icon}</div>
+      <div className='content-center mx-5 xl:mx-0 w-[36px] h-[36px]'>{icon}</div>
       <span className='hidden xl:inline text-[18px] ml-[8px] mr-[3vw]'>{label}</span>
     </div>
   )

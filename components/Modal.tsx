@@ -12,7 +12,7 @@ const Modal: React.FC<ModalProps> = ({ body }) => {
   return (
     <>
         {isModal && <div className='fixed w-full h-full content-center z-50 bg-neutral-800 bg-opacity-70'>
-            <div className='w-full md:w-[38rem] h-full md:h-auto md:max-h-[calc(100vh-5vh)] bg-white dark:bg-black md:rounded-2xl overflow-y-auto'>
+            <div className='w-full md:w-[38rem] h-full md:h-auto max-h-screen bg-white dark:bg-black md:rounded-2xl overflow-y-auto'>
               {body}
             </div>
         </div>}
