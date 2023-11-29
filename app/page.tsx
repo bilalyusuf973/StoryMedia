@@ -1,35 +1,12 @@
-'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useModalContext } from './contexts/ModalContext'
-import Login from '@/components/Login'
-import Register from '@/components/Register'
 
 const Homepage = () => {
-  const router = useRouter();
-  const { isModal, setIsModal } = useModalContext();
-  const [showLogin, setShowLogin] = useState(false);
-  const [showRegister, setShowRegister] = useState(false);
-
-  const showLoginModal = () => {
-    setIsModal(true); 
-    setShowLogin(true);
-  }
-
-  const showRegisterModal = () => {
-    setIsModal(true); 
-    setShowRegister(true);
-  }
-
   return (
-  <>
-    {isModal && showLogin && <Login setShowLogin={setShowLogin}/>}
-    {isModal && showRegister && <Register setShowRegister={setShowRegister}/>}
     <div className='w-full h-screen flex overflow-auto'>
       <div className='lg:w-full m-auto p-4 flex flex-col lg:flex-row items-center lg:justify-around'>
         <div className='mr-auto lg:mr-0'>
-          <img src="brandIcon.png" alt="Icon" className='w-[64px] h-[64px] lg:w-[320px] lg:h-[320px]' onClick={() => router.push("/home")}/>
+          <img src="/brandIcon.png" alt="Icon" className='w-[64px] h-[64px] lg:w-[320px] lg:h-[320px]'/>
         </div>
         <div className=''>
           <div className='flex items-center flex-wrap text-4xl lg:text-5xl font-bold mb-12 mt-7'>
@@ -51,15 +28,18 @@ const Homepage = () => {
               <div className='text-[14px]'>or</div>
               <div className='h-[1px] bg-gray-300 w-full mx-2'></div>
             </div>
-            <div className='cursor-pointer content-center bg-blue-600 hover:bg-blue-800 text-white text-[15px] font-semibold rounded-[25px] my-3 p-2' onClick={showRegisterModal}>Create Account</div>
+            <Link href='/auth/signup'>
+              <div className='cursor-pointer content-center bg-blue-600 hover:bg-blue-800 text-white text-[15px] font-semibold rounded-[25px] my-3 p-2'>Create Account</div>
+            </Link>
             <div className='text-[11px] text-[#b4b4b4]'>By signing up, you agree to the <Link href="/" className='text-[#569aff] hover:underline'>Terms of Service</Link> and <Link href="/" className='text-[#569aff] hover:underline'>Privacy Policy</Link>, including <Link href="/" className='text-[#569aff] hover:underline'>Cookie Use.</Link></div>
             <div className='text-[16px] font-semibold mt-[50px] mb-3'>Already have an account?</div>
-            <div className='cursor-pointer content-center hover:bg-[#70a4f823] text-blue-600 text-[15px] font-semibold rounded-[25px] p-2 border border-gray-400' onClick={showLoginModal}>Sign in</div>
+            <Link href='/auth/login'>
+              <div className='cursor-pointer content-center hover:bg-[#70a4f823] text-blue-600 text-[15px] font-semibold rounded-[25px] p-2 border border-gray-400'>Sign in</div>
+            </Link>
           </div>
         </div>
       </div>
     </div>
-  </>
   )
 }
 
