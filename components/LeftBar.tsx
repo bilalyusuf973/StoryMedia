@@ -8,6 +8,7 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import { Avatar } from '@mui/material';
+import { signOut } from 'next-auth/react';
 
 type MenuItemProps = {
   icon: React.JSX.Element;
@@ -53,7 +54,7 @@ export default function LeftBar() {
       {showLogout && <div className='hidden xl:flex absolute bottom-[85px] left-[80px] flex-col'>
         <div className='w-[280px] bg-white dark:bg-[#0b0b0b] rounded-[20px] shadow-[0px_2px_15px_#a9a9a9] dark:shadow-[0px_2px_15px_rgb(255,255,255,0.3)]'>
           <div className='py-4'>
-            <div className='flex items-center gap-x-1 font-semibold px-5 py-2 hover:bg-[#dadada] dark:hover:bg-[#1b1b1b] cursor-pointer'>
+            <div className='flex items-center gap-x-1 font-semibold px-5 py-2 hover:bg-[#dadada] dark:hover:bg-[#1b1b1b] cursor-pointer' onClick={() => signOut({callbackUrl: "/", redirect: true})}>
               <span>Log out</span>
               <span>@username</span>
             </div>

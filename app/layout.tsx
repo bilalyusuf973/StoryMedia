@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ThemeContextProvider } from '@/app/contexts/ThemeContext'
 import { ModalContextProvider } from './contexts/ModalContext'
+import Sessionprovider from '@/authProvider/SessionProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,11 +20,13 @@ export default function RootLayout({
   return (
     <html lang="en">
         <body className={inter.className + " " + 'dark:bg-[#000000] dark:text-white min-h-screen'}>
-          <ThemeContextProvider>
-            <ModalContextProvider>
-            {children}
-            </ModalContextProvider>
-          </ThemeContextProvider>
+          <Sessionprovider>
+            <ThemeContextProvider>
+              <ModalContextProvider>
+              {children}
+              </ModalContextProvider>
+            </ThemeContextProvider>
+          </Sessionprovider>
         </body>
     </html>
   )

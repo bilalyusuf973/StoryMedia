@@ -1,7 +1,19 @@
-import React from 'react'
+'use client'
+import React, { useEffect } from 'react'
 import Link from 'next/link'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 const Homepage = () => {
+  const router = useRouter();
+  const { data: session } = useSession();
+  
+  useEffect(() => {
+    if(session){
+      router.push("/home");
+    }
+  }, [session])
+  
   return (
     <div className='w-full h-screen flex overflow-auto'>
       <div className='lg:w-full m-auto p-4 flex flex-col lg:flex-row items-center lg:justify-around'>
@@ -28,12 +40,12 @@ const Homepage = () => {
               <div className='text-[14px]'>or</div>
               <div className='h-[1px] bg-gray-300 w-full mx-2'></div>
             </div>
-            <Link href='/auth/signup'>
+            <Link href='/signup'>
               <div className='cursor-pointer content-center bg-blue-600 hover:bg-blue-800 text-white text-[15px] font-semibold rounded-[25px] my-3 p-2'>Create Account</div>
             </Link>
             <div className='text-[11px] text-[#b4b4b4]'>By signing up, you agree to the <Link href="/" className='text-[#569aff] hover:underline'>Terms of Service</Link> and <Link href="/" className='text-[#569aff] hover:underline'>Privacy Policy</Link>, including <Link href="/" className='text-[#569aff] hover:underline'>Cookie Use.</Link></div>
             <div className='text-[16px] font-semibold mt-[50px] mb-3'>Already have an account?</div>
-            <Link href='/auth/login'>
+            <Link href='/login'>
               <div className='cursor-pointer content-center hover:bg-[#70a4f823] text-blue-600 text-[15px] font-semibold rounded-[25px] p-2 border border-gray-400'>Sign in</div>
             </Link>
           </div>
