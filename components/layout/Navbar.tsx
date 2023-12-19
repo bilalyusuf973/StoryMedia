@@ -1,7 +1,10 @@
 'use client'
 import React, { useState } from 'react'
+
 import Link from 'next/link';
+
 import { useThemeContext } from '@/app/contexts/ThemeContext'
+
 import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
@@ -47,8 +50,8 @@ export default function Navbar() {
             </div>
           </div>
           <div className='w-full min-w-[280px] mt-14 px-3 py-5 flex flex-col dark:bg-black gap-y-3'>
-            <div className="mb-2 h-[50px] flex rounded-full border-[1px] border-gray-600">
-              <input type="text" name='searchBar' autoComplete='off' className='indent-5 w-[85%] rounded-tl-full rounded-bl-full border-r-[1px] border-gray-600 dark:bg-black outline-none text-xl' placeholder='Search...'/>
+            <div className="mb-2 h-[50px] flex rounded-full border border-neutral-500">
+              <input type="text" name='searchBar' autoComplete='off' className='indent-5 w-[85%] rounded-tl-full rounded-bl-full border-r border-neutral-500 dark:bg-black outline-none text-xl' placeholder='Search...'/>
               <div className='w-[15%] rounded-tr-full rounded-br-full content-center bg-[#d5d5d5] dark:bg-[#1c1c1c]'>
                 <SearchRoundedIcon sx={{ fontSize: 30 }} className='cursor-pointer ml-1 mr-1'/>
               </div>
@@ -65,17 +68,18 @@ export default function Navbar() {
 
           <div className='left w-full md:w-fit flex items-center'>
             <Link href="/" className='content-center'>
-                <img src="brandIcon.png" alt="Icon" className='brandImage ml-2 md:ml-6 mr-4 w-[45px] h-[45px]'/>
+                <img src="/brandIcon.png" alt="Icon" className='brandImage ml-2 md:ml-6 mr-4 w-[45px] h-[45px]'/>
                 <div className="hidden lg:block brandName">NET<span className='ml-1 text-[#699cfa]'>VIBES</span></div>
             </Link>
           </div>
 
-          <div className="search justify-center items-center hidden md:flex">
-              <input type="text" name='searchBar' autoComplete='off' className='searchBar w-[30vw] dark:bg-[#000000]' placeholder='Search...'/>
-              <div className='searchIconDiv content-center bg-[#d5d5d5] dark:bg-[#1c1c1c]'><SearchRoundedIcon sx={{ fontSize: 30 }} className='cursor-pointer ml-[6px] mr-[6px]'/></div>
-          </div>
 
-          <div className='right content-center gap-x-1 mr-2'>
+          <div className='right content-center gap-2 mr-2'>
+            <div className="h-10 rounded-full border border-neutral-500 justify-center items-center hidden md:flex">
+                <input type="text" name='searchBar' autoComplete='off' className='h-full indent-5 rounded-tl-full rounded-bl-full outline-none w-[25vw] dark:bg-[#000000] border-r border-neutral-500' placeholder='Search...'/>
+                <div className='h-full rounded-tr-full rounded-br-full px-[12px] content-center bg-[#d5d5d5] dark:bg-[#1c1c1c]'><SearchRoundedIcon sx={{ fontSize: 30 }} className='cursor-pointer'/></div>
+            </div>
+
             { theme === "light" ? <DarkModeRoundedIcon sx={{ fontSize: 30 }} className='darkThemeIcon cursor-pointer' onClick={() => {toggleTheme()}}/> : 
             <LightModeRoundedIcon sx={{ fontSize: 30 }} className='lightThemeIcon cursor-pointer' onClick={() => {toggleTheme()}}/>}
             <div className='md:hidden menuBtn content-center gap-x-1' onClick={() => setShowNavMenu(prev => !prev)}>
@@ -83,7 +87,7 @@ export default function Navbar() {
               <MenuIcon sx={{ fontSize: 30 }} className='openMenuIcon cursor-pointer'/>
             </div>
             <div className='xl:hidden'>
-              <Avatar alt="" src="" sx={{width:35, height:35, cursor:'pointer'}}/>
+              <Avatar alt="Avatar" src="" sx={{width:35, height:35, cursor:'pointer'}}/>
             </div>
           </div>
 

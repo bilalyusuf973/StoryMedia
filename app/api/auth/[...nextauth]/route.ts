@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { User } from '@/app/models/model';
+import { User } from '@/models/model';
 import connectToMongo from '@/libs/db';
 import { AuthOptions  } from 'next-auth';
 

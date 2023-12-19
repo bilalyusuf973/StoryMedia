@@ -1,8 +1,12 @@
 import React from 'react'
-import Navbar from '@/components/Navbar'
-import LeftBar from '@/components/LeftBar'
-import MiddleBar from '@/components/MiddleBar'
-import RightBar from '@/components/RightBar'
+
+import Navbar from '@/components/layout/Navbar'
+import LeftBar from '@/components/layout/LeftBar'
+import MiddleBar from '@/components/layout/MiddleBar'
+import RightBar from '@/components/layout/RightBar'
+import Stories from '@/components/Stories'
+import Thoughts from '@/components/Thoughts'
+import Posts from '@/components/Posts'
 
 
 export default function Home() {
@@ -11,8 +15,16 @@ export default function Home() {
       <Navbar/>
       <div className="flex">
         <LeftBar/>
-        <MiddleBar/>
-        <RightBar/>
+
+        <MiddleBar>
+          <Stories/>
+          <Thoughts/>
+          <Posts/>
+        </MiddleBar>
+
+        <RightBar>
+          <></>
+        </RightBar>
       </div>
     </div>
   )

@@ -1,11 +1,14 @@
 'use client'
 import React, { useState } from 'react'
-import Modal from '@/components/Modal'
-import Input from '@/components/Input'
 import { useRouter } from 'next/navigation';
+
+import Modal from '@/components/layout/Modal'
+import Input from '@/components/Input'
+
 import Homepage from '@/app/page';
 import axios from 'axios';
 import { signIn } from 'next-auth/react';
+import { toast } from 'react-hot-toast';
 
 const Login = () => {
   const router = useRouter();
@@ -24,7 +27,6 @@ const Login = () => {
     try {
       setIsLoading(true);
 
-      // todo add login functionality
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -35,15 +37,15 @@ const Login = () => {
       const data = await res.data;
 
       if(data.status === 200){
-        console.log(data.message);
-        signIn("credentials", {
+        await signIn("credentials", {
           email: email,
           password: password,
           callbackUrl: "/home",
           redirect: true
         });
+        toast.success(data.message);
       }else if(data.status === 400){
-        console.log(data.errors)
+        toast.error(data.error);
       }
     } catch (error) {
       console.log(error);

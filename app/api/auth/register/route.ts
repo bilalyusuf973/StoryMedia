@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { User } from '@/app/models/model'
+import { User } from '@/models/model'
 import { NextRequest, NextResponse } from 'next/server';
 import vine, { errors } from '@vinejs/vine';
 import { registerSchema } from '@/validator/authSchema';
@@ -18,7 +18,7 @@ export async function POST(req: NextRequest){
 
         const user = await User.findOne({email: output.email});
         if(user){
-            return NextResponse.json({ status: 400, errors: { error: 'Email has already taken! Please use another email.' } }, { status: 200 })
+            return NextResponse.json({ status: 400, error: 'This email has already been taken. Please choose a different email.' }, { status: 200 })
         }
         else{
             const salt = bcrypt.genSaltSync(10)

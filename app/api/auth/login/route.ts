@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { User } from '@/app/models/model'
+import { User } from '@/models/model'
 import { NextRequest, NextResponse } from 'next/server';
 import vine, { errors } from '@vinejs/vine';
 import { loginSchema } from '@/validator/authSchema';
@@ -18,12 +18,12 @@ export async function POST(req: NextRequest){
 
         const user = await User.findOne({email: output.email});
         if(!user){
-            return NextResponse.json({ status: 400, errors: { error: 'Account not found!' } }, { status: 200 })
+            return NextResponse.json({ status: 400, error: 'Account not found!' }, { status: 200 })
         }
         else{
             const compare = await bcrypt.compare(output.password, user.hashedPassword);
             if(!compare){
-                return NextResponse.json({ status: 400, errors: { error: 'Invalid Credentials!' } }, { status: 200 })
+                return NextResponse.json({ status: 400, error: 'Invalid Credentials!' }, { status: 200 })
             }
     
             return NextResponse.json({ status: 200, message: 'Logged in successfully!' }, { status: 200 });

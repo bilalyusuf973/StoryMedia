@@ -1,9 +1,12 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+
 import { ThemeContextProvider } from '@/app/contexts/ThemeContext'
 import { ModalContextProvider } from './contexts/ModalContext'
+
 import Sessionprovider from '@/authProvider/SessionProvider'
+import { Toaster } from 'react-hot-toast'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,6 +24,7 @@ export default function RootLayout({
     <html lang="en">
         <body className={inter.className + " " + 'dark:bg-[#000000] dark:text-white min-h-screen'}>
           <Sessionprovider>
+            <Toaster position='top-center' reverseOrder={false}/>
             <ThemeContextProvider>
               <ModalContextProvider>
               {children}

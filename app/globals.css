@@ -31,32 +31,3 @@ body{
     font-size: 30px;
     font-family: Impact, 'Arial Narrow Bold', sans-serif;
 }
-
-.search{
-    box-shadow: var(--shadow);
-    border: 1px solid #757575be;
-    border-radius: 20px;
-    height: 40px;
-}
-
-.searchBar{
-    height: 100%;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    text-indent: 15px;
-    outline: none;
-    border-right: 1px solid #757575be;
-    
-}
-
-.searchIconDiv{
-    height: 100%;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    padding: 0 6px;
-}
-
-.menu{
-    box-shadow: var(--shadow);
-    padding: 25px;
-}
