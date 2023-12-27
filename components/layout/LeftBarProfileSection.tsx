@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { Avatar } from '@mui/material';
 
@@ -8,11 +8,7 @@ import useCurrentUser from '@/hooks/useCurrentUser';
 
 const LeftBarProfileSection = () => {
   const [showLogout, setShowLogout] = useState(false);
-  let userData: any;
-  useEffect(() => {
-      const { data }  = useCurrentUser();
-      userData = data;
-  }, [useCurrentUser])
+  const { data }  = useCurrentUser();
   
   return (
     <>
@@ -20,8 +16,8 @@ const LeftBarProfileSection = () => {
             <Avatar alt="" src="" sx={{ width: 45, height: 45 }} />
             <div className='flex justify-between items-center w-full ml-2'>
                 <div className='flex flex-col leading-[20px]'>
-                    <span className='font-semibold'>{userData?.currentUser?.name || 'Name'}</span>
-                    <span className='text-[#afafafbe]'>@{userData?.currentUser?.username || 'username'}</span>
+                    <span className='font-semibold'>{data?.currentUser?.name || 'Name'}</span>
+                    <span className='text-[#afafafbe]'>@{data?.currentUser?.username || 'username'}</span>
                 </div>
                 <div className='font-extrabold text-xl mb-[7px]'>...</div>
             </div>
@@ -31,7 +27,7 @@ const LeftBarProfileSection = () => {
                 <div className='py-4'>
                     <div className='flex items-center gap-x-1 font-semibold px-5 py-2 hover:bg-[#dadada] dark:hover:bg-[#1b1b1b] cursor-pointer' onClick={() => signOut({callbackUrl: "/", redirect: true})}>
                         <span>Log out</span>
-                        <span>@{userData?.currentUser?.username || 'username'}</span>
+                        <span>@{data?.currentUser?.username || 'username'}</span>
                     </div>
                 </div>
             </div>
