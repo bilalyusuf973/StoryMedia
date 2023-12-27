@@ -1,12 +1,51 @@
 'use client'
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import axios from 'axios'
+import { signIn } from 'next-auth/react'
+import { toast } from 'react-hot-toast'
 
 const Homepage = () => {
   const router = useRouter();
   const { data: session } = useSession();
+
+  const [email, setEmail] = useState('demouser@gmail.com');
+  const [password, setPassword] = useState('11223344');
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleDemoLogin = async () => {
+    try {
+      setIsLoading(true);
+
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      };
+
+      const res = await axios.post('/api/auth/login', requestOptions);
+      const data = await res.data;
+
+      if(data.status === 200){
+        await signIn("credentials", {
+          email: email,
+          password: password,
+          callbackUrl: "/home",
+          redirect: true
+        });
+        toast.success(data.message);
+      }else if(data.status === 400){
+        toast.error(data.error);
+      }
+    } catch (error) {
+      console.log(error);
+    }finally{
+      setIsLoading(false);
+    }
+
+  }
   
   useEffect(() => {
     if(session){
@@ -48,6 +87,7 @@ const Homepage = () => {
             <Link href='/login'>
               <div className='cursor-pointer content-center hover:bg-[#70a4f823] text-blue-600 text-[15px] font-semibold rounded-[25px] p-2 border border-gray-400'>Sign in</div>
             </Link>
+            <div className='cursor-pointer content-center bg-blue-600 hover:bg-blue-800 text-white text-[15px] font-semibold rounded-[25px] my-3 p-2' onClick={handleDemoLogin}>Click here to login as a Demo User</div>
           </div>
         </div>
       </div>

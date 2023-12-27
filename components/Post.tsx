@@ -5,14 +5,16 @@ import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
 import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import { Avatar } from '@mui/material'
+import useCurrentUser from '@/hooks/useCurrentUser';
 
 const Post = () => {
+  const { data } = useCurrentUser();
   return (
     <div className='postDiv mt-1 mb-2 border-b-[1px] border-gray-500'>
         <div className="postHead flex justify-between items-center px-3 md:px-1 py-2">
           <div className="profileInfo content-center">
               <Avatar alt="" src="" sx={{width:35, height:35, marginRight:1, cursor:'pointer'}}/>
-              <span className='postUsername font-semibold text-sm hover:opacity-[0.5] cursor-pointer'>username</span>
+              <span className='postUsername font-semibold text-sm hover:opacity-[0.5] cursor-pointer'>@{data?.currentUser?.username || 'username'}</span>
               <span className='postTime text-[#747474be] text-sm'>&nbsp;&#x2022;&nbsp;2d</span>
           </div>
           <div className="postFeatures cursor-pointer font-extrabold text-md hover:opacity-[0.5]">...</div>
