@@ -23,9 +23,9 @@ export default function UserView() {
         <LeftBar/>
 
         <MiddleBar>
-           { !isLoading ? <div className='h-full w-full flex flex-col'>
-              <BackBtnHeader showBackArrow={true} label={data?.currentUser?.username}/>
-              <UserHero username={data?.currentUser?.username}/>
+           { !isLoading && data?.currentUser ? <div className='h-full w-full flex flex-col'>
+              <BackBtnHeader showBackArrow={true} label={data.currentUser.username}/>
+              <UserHero username={data.currentUser.username}/>
               <UserBio/>
               <PostFeed/>
            </div> : <div></div> }

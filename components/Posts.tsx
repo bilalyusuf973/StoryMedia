@@ -10,8 +10,8 @@ const Posts = () => {
   return (
     <>
       <div className="posts content-center flex-col">
-          { !isLoading ? posts.map((post, index) => {
-          return <Post key={index} username={data?.currentUser?.username} body=''/>
+          { !isLoading && data?.currentUser ? posts.map((post, index) => {
+          return <Post key={index} username={data.currentUser.username} body=''/>
           }) : <div></div> }
       </div>
     </>
