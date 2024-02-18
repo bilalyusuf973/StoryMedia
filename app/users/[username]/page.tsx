@@ -9,14 +9,12 @@ import UserHero from '@/components/user/UserHero'
 import UserBio from '@/components/user/UserBio'
 import PostFeed from '@/components/PostFeed'
 
-// import useCurrentUser from '@/hooks/useCurrentUser'
 import useUser from '@/hooks/useUser'
 
 import { usePathname } from 'next/navigation'
 
 export default function UserView() {
     const username = usePathname().split('users/')[1];
-    // const { data: currentUser, isLoading } = useCurrentUser();
     const { data, isLoading } = useUser(username);
 
   return (
@@ -26,7 +24,7 @@ export default function UserView() {
         <LeftBar/>
 
         <MiddleBar>
-           { !isLoading && data?.user ? <div className='h-full w-full flex flex-col'>
+           { !isLoading ? <div className='h-full w-full flex flex-col'>
               <BackBtnHeader showBackArrow={true} label={username}/>
               <UserHero username={username}/>
               <UserBio/>

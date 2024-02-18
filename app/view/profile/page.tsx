@@ -10,11 +10,9 @@ import UserBio from '@/components/user/UserBio'
 import PostFeed from '@/components/PostFeed'
 
 import useCurrentUser from '@/hooks/useCurrentUser'
-// import useUser from '@/hooks/useUser'
 
 export default function UserView() {
     const { data, isLoading } = useCurrentUser();
-    // const { data: fetchedUser } = useUser(username);
 
   return (
     <div className='homepapge w-full h-full'>
@@ -23,9 +21,9 @@ export default function UserView() {
         <LeftBar/>
 
         <MiddleBar>
-           { !isLoading && data?.currentUser ? <div className='h-full w-full flex flex-col'>
-              <BackBtnHeader showBackArrow={true} label={data.currentUser.username}/>
-              <UserHero username={data.currentUser.username}/>
+           { !isLoading ? <div className='h-full w-full flex flex-col'>
+              <BackBtnHeader showBackArrow={true} label={data?.currentUser?.username}/>
+              <UserHero username={data?.currentUser?.username}/>
               <UserBio/>
               <PostFeed/>
            </div> : <div></div> }

@@ -12,12 +12,12 @@ const LeftBarProfileSection = () => {
   
   return (
     <>
-        { !isLoading && data?.currentUser && <div className="profileSection hidden text-[15px] xl:flex ml-[6vw] m-3 p-2 cursor-pointer rounded-[20px] hover:bg-[#d5d5d5] dark:hover:bg-[#1c1c1c]" onClick={() => setShowLogout(prev => !prev)}>
+        { !isLoading && <div className="profileSection hidden text-[15px] xl:flex ml-[6vw] m-3 p-2 cursor-pointer rounded-[20px] hover:bg-[#d5d5d5] dark:hover:bg-[#1c1c1c]" onClick={() => setShowLogout(prev => !prev)}>
         <Avatar alt="" src="" sx={{ width: 45, height: 45 }} />
         <div className='flex justify-between items-center w-full ml-2'>
                 <div className='flex flex-col leading-[20px]'>
-                    <span className='font-semibold'>{data.currentUser.name}</span>
-                    <span className='text-neutral-500'>@{data.currentUser.username}</span>
+                    <span className='font-semibold'>{data?.currentUser?.name}</span>
+                    <span className='text-neutral-500'>@{data?.currentUser?.username}</span>
                 </div>
                 <div className='font-extrabold mb-[7px]'>...</div>
             </div>

@@ -12,10 +12,14 @@ export async function GET(){
             throw new Error("Not Signed In!");
         }
 
+        console.log(session.user.email)
+
         const currentUser = await User.findOne({email: session.user.email});
         if(!currentUser){
             throw new Error("User does not exist!");
         }
+
+        console.log(currentUser)
 
         return NextResponse.json({ status: 200, currentUser }, { status: 200 });
     } catch (error) {
