@@ -22,6 +22,7 @@ const PostSchema = new Schema({
         ref: 'User'
     },
     body: String,
+    caption: String,
     likedIds: [Schema.Types.ObjectId],
 
     comments: [MessageSchema],

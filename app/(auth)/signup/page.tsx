@@ -27,6 +27,7 @@ const Register = () => {
   }
 
   const handleSubmit = async () => {
+    if(isLoading) return;
     try {
       setIsLoading(true);
 

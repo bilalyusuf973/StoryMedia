@@ -4,7 +4,7 @@ import { useCallback } from "react";
 
 import useUser from "@/hooks/useUser";
 
-interface AvatarProps {
+type AvatarProps = {
   username: string;
   hasBorder?: boolean;
 }

@@ -5,6 +5,10 @@ import Link from 'next/link';
 
 import { useThemeContext } from '@/app/contexts/ThemeContext'
 
+import { signOut } from 'next-auth/react';
+
+import { useRouter } from 'next/navigation';
+
 import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
@@ -28,16 +32,17 @@ type NavbarMenuItemProps = {
 export default function Navbar() {
   const { theme, toggleTheme } = useThemeContext();
   const [showNavMenu, setShowNavMenu] = useState(false);
+  const router = useRouter();
 
   const navbarMenuItemsData = [
-    { icon: <HomeRoundedIcon sx={{ fontSize: 32 }} className='mx-3'/>, label: 'Home'},
+    { icon: <HomeRoundedIcon sx={{ fontSize: 32 }} className='mx-3'/>, label: 'Home', onClick: () => router.push('/home')},
     { icon: <ExploreOutlinedIcon sx={{ fontSize: 32 }} className='mx-3'/>, label: 'Explore'},
     { icon: <VideocamOutlinedIcon sx={{ fontSize: 32 }} className='mx-3'/>, label: 'Videos'},
     { icon: <SendOutlinedIcon sx={{ fontSize: 30 }} className='mx-3 -rotate-[30deg]'/>, label: 'Messages'},
     { icon: <FavoriteBorderOutlinedIcon sx={{ fontSize: 32 }} className='mx-3'/>, label: 'Notifications'},
     { icon: <AddCircleOutlineOutlinedIcon sx={{ fontSize: 32 }} className='mx-3'/>, label: 'Create'},
-    { icon: <PersonOutlineOutlinedIcon sx={{ fontSize: 32 }} className='mx-3'/>, label: 'Profile'},
-    { icon: <LogoutOutlinedIcon sx={{ fontSize: 32 }} className='mx-3'/>, label: 'Logout'},
+    { icon: <PersonOutlineOutlinedIcon sx={{ fontSize: 32 }} className='mx-3'/>, label: 'Profile', onClick: () => router.push('/view/profile')},
+    { icon: <LogoutOutlinedIcon sx={{ fontSize: 32 }} className='mx-3'/>, label: 'Logout', onClick: () => signOut({callbackUrl: "/", redirect: true})},
   ]
 
   return (
