@@ -3,7 +3,6 @@ import fetcher from '@/libs/fetcher';
 
 const useCurrentUser = () => {
     const { data, error, isLoading } = useSWR('/api/auth/currentuser', fetcher);
-    console.log(data, error)
     return { data, error, isLoading };
 };
 
