@@ -27,7 +27,7 @@ const LeftBarProfileSection = () => {
                 <div className='py-4'>
                     <div className='flex items-center gap-1 font-semibold px-5 py-2 hover:bg-[#dadada] dark:hover:bg-[#1b1b1b] cursor-pointer' onClick={() => signOut({callbackUrl: "/", redirect: true})}>
                         <span>Log out</span>
-                        <span>@{data.currentUser.username}</span>
+                        <span>@{data?.currentUser?.username}</span>
                     </div>
                 </div>
             </div>
