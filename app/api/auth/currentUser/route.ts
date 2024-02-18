@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { authOptions } from "../[...nextauth]/route";
 import connectToMongo from "@/libs/db";
 
-export default async function GET(){
+export async function GET(){
     try {
         await connectToMongo();
         const session = await getServerSession(authOptions);
