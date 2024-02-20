@@ -4,7 +4,7 @@ import { User } from '@/models/model';
 import connectToMongo from '@/libs/db';
 import { AuthOptions } from 'next-auth';
 
-export const authOptions: AuthOptions = {
+const authOptions: AuthOptions = {
   pages: {
     signIn: "/home",
   },
