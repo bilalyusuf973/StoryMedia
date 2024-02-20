@@ -1,8 +1,8 @@
-import NextAuth from 'next-auth';
+import NextAuth from 'next-auth/next';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { User } from '@/models/model';
 import connectToMongo from '@/libs/db';
-import { AuthOptions  } from 'next-auth';
+import { AuthOptions } from 'next-auth';
 
 export const authOptions: AuthOptions = {
   pages: {

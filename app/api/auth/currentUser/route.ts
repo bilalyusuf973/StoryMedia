@@ -1,7 +1,5 @@
 import { User } from "@/models/model";
-import { getServerSession } from "next-auth/next";
 import { NextRequest, NextResponse } from "next/server";
-import { authOptions } from "../[...nextauth]/route";
 import connectToMongo from "@/libs/db";
 
 export async function POST(req: NextRequest){
