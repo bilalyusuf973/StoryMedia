@@ -2,7 +2,7 @@ import { User } from "@/models/model";
 import { NextResponse } from "next/server";
 import connectToMongo from "@/libs/db";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/route";
+import { authOptions } from "@/libs/authOptions";
 
 export async function GET(){
     try {
