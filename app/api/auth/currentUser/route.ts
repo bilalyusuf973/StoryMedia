@@ -6,9 +6,7 @@ export async function POST(req: NextRequest){
     try {
         await connectToMongo();
         
-        const request = await req.json();
-        console.log(request)
-        const { email } = JSON.parse(request.body)
+        const { email } = await req.json();
         if(!email){
             throw new Error("Not Signed In!");
         }

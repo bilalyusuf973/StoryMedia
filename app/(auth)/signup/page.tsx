@@ -34,13 +34,7 @@ const Register = () => {
       if(password !== password_confirmation)
         throw new Error("Confirm Password Again!");
 
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({name, username, email, password, password_confirmation})
-      };
-
-      const res = await axios.post('/api/auth/register', requestOptions);
+      const res = await axios.post('/api/auth/register', { name, username, email, password, password_confirmation });
       const data = await res.data;
 
       if(data.status === 200){

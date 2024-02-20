@@ -20,13 +20,7 @@ const Homepage = () => {
     try {
       setIsLoading(true);
 
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
-      };
-
-      const res = await axios.post('/api/auth/login', requestOptions);
+      const res = await axios.post('/api/auth/login', { email, password });
       const data = await res.data;
 
       if(data.status === 200){
