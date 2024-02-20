@@ -9,8 +9,9 @@ import connectToMongo from '@/libs/db';
 export async function POST(req: NextRequest){
     try {
         await connectToMongo();
-        const request = await req.json();
-        const body = JSON.parse(request.body);
+
+        const body = await req.json();
+        
         const validator = vine.compile(registerSchema)
         const output = await validator.validate(body, {
             errorReporter: () => new ErrorReporter()
