@@ -5,8 +5,10 @@ import connectToMongo from "@/libs/db";
 export async function POST(req: NextRequest){
     try {
         await connectToMongo();
-
-        const { email } = await req.json();
+        
+        const request = await req.json();
+        console.log(request)
+        const { email } = JSON.parse(request.body)
         if(!email){
             throw new Error("Not Signed In!");
         }

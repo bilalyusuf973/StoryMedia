@@ -10,12 +10,18 @@ export async function POST(req: NextRequest){
     try {
         await connectToMongo();
 
-        const body = await req.json();
+        const request = await req.json();
+        console.log( request );
+        const body = JSON.parse(request.body);
+
+        console.log(body)
         
         const validator = vine.compile(loginSchema)
         const output = await validator.validate(body, {
             errorReporter: () => new ErrorReporter()
         });
+
+        console.log(output)
 
         const user = await User.findOne({email: output.email});
         if(!user){
