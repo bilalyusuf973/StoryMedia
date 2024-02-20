@@ -16,7 +16,7 @@ export async function GET(req: NextRequest){
         if(!userInfo)
             throw new Error("Invalid Username!");
 
-        const followersCount = await User.find({ followingIds: { username } }).countDocuments();
+        const followersCount = await User.find({ followingIds: { _id: userInfo._id } }).countDocuments();
   
         return NextResponse.json({ status: 200, user: {userInfo, followersCount} }, { status: 200 });
     } catch (error) {

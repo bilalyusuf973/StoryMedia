@@ -12,7 +12,7 @@ type AvatarProps = {
 const Avatar: React.FC<AvatarProps> = ({ username, hasBorder }) => {
   const router = useRouter();
 
-  const { data: fetchedUser } = useUser(username);
+  // const { data: fetchedUser } = useUser(username);
 
   const onClick = useCallback((event: any) => {
     event.stopPropagation();
@@ -34,7 +34,7 @@ const Avatar: React.FC<AvatarProps> = ({ username, hasBorder }) => {
         relative
       `}
     >
-      <Image
+      {/* <Image
         fill
         style={{
           objectFit: 'cover',
@@ -45,7 +45,7 @@ const Avatar: React.FC<AvatarProps> = ({ username, hasBorder }) => {
         src={fetchedUser?.profileImage || '/avatarImage.png'}
         priority
         sizes="100%"
-      />
+      /> */}
     </div>
   );
 }

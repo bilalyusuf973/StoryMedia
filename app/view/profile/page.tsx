@@ -13,7 +13,7 @@ import { CircularProgress } from '@mui/material'
 
 import useCurrentUser from '@/hooks/useCurrentUser'
 
-export default function UserView() {
+export default function ProfileView() {
     const { data, isLoading } = useCurrentUser();
 
   return (

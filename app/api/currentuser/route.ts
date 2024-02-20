@@ -12,7 +12,7 @@ export async function GET(){
         if(!session || !session.user) 
             throw new Error('Not Signed in!');
 
-        const currentUser = await User.findOne({ email: session.user.email }).select(['name', 'username', 'email', 'followingIds', 'posts', 'messages', 'notifications']);
+        const currentUser = await User.findOne({ email: session.user.email }).select(['name', 'username', 'email', 'bio', 'image', 'coverImage', 'profileImage', 'emailVerified', 'hasNotification', 'followingIds', 'posts', 'messages', 'notifications']);
         if(!currentUser){
             throw new Error("User does not exist!");
         }
