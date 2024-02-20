@@ -2,9 +2,17 @@ import { User } from "@/models/model";
 import connectToMongo from "@/libs/db";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest){
+export async function POST(req: NextRequest){
     try {
         await connectToMongo();
+
+        const request = await req.json();
+        const { email } = JSON.parse(request.body);
+
+        if(!email){
+            throw new Error("Not Signed In!");
+        }
+
         const username = req.url.split("users/")[1];
 
         if(!username || typeof username !== 'string')
