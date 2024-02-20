@@ -23,6 +23,7 @@ import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOu
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { Avatar } from '@mui/material';
+import useCurrentUser from '@/hooks/useCurrentUser';
 
 type NavbarMenuItemProps = {
   icon: React.JSX.Element;
@@ -34,6 +35,7 @@ export default function Navbar() {
   const { theme, toggleTheme } = useThemeContext();
   const [showNavMenu, setShowNavMenu] = useState(false);
   const router = useRouter();
+  const { data } = useCurrentUser();
 
   const navbarMenuItemsData = [
     { icon: <HomeRoundedIcon sx={{ fontSize: 32 }}/>, label: 'Home', onClick: () => router.push('/home')},
@@ -42,8 +44,7 @@ export default function Navbar() {
     { icon: <SendOutlinedIcon sx={{ fontSize: 30 }} className='-rotate-[30deg]'/>, label: 'Messages'},
     { icon: <FavoriteBorderOutlinedIcon sx={{ fontSize: 32 }}/>, label: 'Notifications'},
     { icon: <AddCircleOutlineOutlinedIcon sx={{ fontSize: 32 }}/>, label: 'Create'},
-    // { icon: <PersonOutlineOutlinedIcon sx={{ fontSize: 32 }} className='mx-3'/>, label: 'Profile', onClick: () => router.push('/view/profile')},
-    { icon: <Avatar alt="Avatar" src="" sx={{width:35, height:35}}/>, label: 'Profile', onClick: () => router.push('/view/profile')},
+    { icon: <Avatar alt="Avatar" src="" sx={{width:35, height:35}}/>, label: data?.currentUser?.name, onClick: () => router.push('/view/profile')},
     { icon: <LogoutOutlinedIcon sx={{ fontSize: 32 }}/>, label: 'Logout', onClick: () => signOut({callbackUrl: "/", redirect: true})},
   ]
 

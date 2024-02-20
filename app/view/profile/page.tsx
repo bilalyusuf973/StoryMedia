@@ -9,6 +9,8 @@ import UserHero from '@/components/user/UserHero'
 import UserBio from '@/components/user/UserBio'
 import PostFeed from '@/components/PostFeed'
 
+import { CircularProgress } from '@mui/material'
+
 import useCurrentUser from '@/hooks/useCurrentUser'
 
 export default function UserView() {
@@ -21,12 +23,12 @@ export default function UserView() {
         <LeftBar/>
 
         <MiddleBar>
-           <div className='h-full w-full flex flex-col'>
-              <BackBtnHeader showBackArrow={true} label={data?.currentUser?.username}/>
-              <UserHero username={data?.currentUser?.username}/>
+           {!isLoading && data?.currentUser ? <div className='h-full w-full flex flex-col'>
+              <BackBtnHeader showBackArrow={true} label={data.currentUser.username}/>
+              <UserHero username={data.currentUser.username}/>
               <UserBio/>
               <PostFeed/>
-           </div>
+           </div> : <div className='h-full content-center'><CircularProgress className='text-blue-500'/></div> }
         </MiddleBar>
 
         <RightBar>

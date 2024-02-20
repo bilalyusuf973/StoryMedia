@@ -2,10 +2,12 @@ import { User } from "@/models/model";
 import connectToMongo from "@/libs/db";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest) {
+export async function GET() {
     try {
         await connectToMongo();
+
         const users = await User.find().sort({ createdAt: -1 });
+        
         return NextResponse.json({ status: 200, users }, { status: 200 });
     } catch (error) {
         return NextResponse.json({ status: 400, error }, { status: 400 });

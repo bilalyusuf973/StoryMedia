@@ -7,7 +7,7 @@ const fetcher = async (url: string) => {
     if(!session || !session.user || !session.user.email) 
         return null;
 
-    const res = await axios.post(url, { email: session.user.email });
+    const res = await axios.get(url);
     const data = await res.data;
 
     return data;
