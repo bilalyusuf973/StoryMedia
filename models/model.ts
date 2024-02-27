@@ -72,6 +72,10 @@ const UserSchema = new Schema({
         required: [true, 'Password is required!']
     },
     followingIds: [Schema.Types.ObjectId],
+    followersIds: [{
+        name: String,
+        username: String,
+    }],
     hasNotification: Boolean,
 
     posts: [PostSchema],

@@ -2,9 +2,13 @@
 import React, { useState } from 'react'
 
 import { Avatar } from '@mui/material';
+import MoreHoriz from '@mui/icons-material/MoreHoriz';
 
 import { signOut } from 'next-auth/react';
 import useCurrentUser from '@/hooks/useCurrentUser';
+
+import Name from '../Name';
+import UserName from '../UserName';
 
 const LeftBarProfileSection = () => {
   const [showLogout, setShowLogout] = useState(false);
@@ -16,10 +20,10 @@ const LeftBarProfileSection = () => {
         <Avatar alt="" src="" sx={{ width: 45, height: 45 }} />
         <div className='flex justify-between items-center w-full ml-2'>
                 <div className='flex flex-col leading-[20px]'>
-                    <span className='font-semibold'>{data.currentUser.name}</span>
-                    <span className='text-neutral-500'>@{data.currentUser.username}</span>
+                    <Name name={data.currentUser.name} sx='text-[16px]'/>
+                    <UserName username={data.currentUser.username} sx='text-neutral-500 text-[14px]'/>
                 </div>
-                <div className='font-extrabold mb-[7px]'>...</div>
+                <MoreHoriz/>
             </div>
         </div>}
         {showLogout && <div className='hidden xl:flex text-[15px] absolute bottom-[85px] left-[80px] flex-col'>
@@ -27,7 +31,7 @@ const LeftBarProfileSection = () => {
                 <div className='py-4'>
                     <div className='flex items-center gap-1 font-semibold px-5 py-2 hover:bg-[#dadada] dark:hover:bg-[#1b1b1b] cursor-pointer' onClick={() => signOut({callbackUrl: "/", redirect: true})}>
                         <span>Log out</span>
-                        <span>@{data.currentUser.username}</span>
+                        <UserName username={data.currentUser.username} sx='text-neutral-500'/>
                     </div>
                 </div>
             </div>

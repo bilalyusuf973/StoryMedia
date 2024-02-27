@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-        <body className={inter.className + " " + 'dark:bg-[#000000] dark:text-white min-h-screen'}>
+        <body className={inter.className + " " + 'dark:bg-black dark:text-white min-h-screen'}>
           <Sessionprovider>
             <Toaster position='top-center' reverseOrder={false}/>
             <ThemeContextProvider>

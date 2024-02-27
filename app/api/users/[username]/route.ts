@@ -1,9 +1,12 @@
 import { User } from "@/models/model";
 import connectToMongo from "@/libs/db";
 import { NextRequest, NextResponse } from "next/server";
+import { verifyUser } from "@/middlewares/verifyUser";
 
 export async function GET(req: NextRequest){
     try {
+        await verifyUser();
+        
         await connectToMongo();
 
         const username = req.url.split("users/")[1];
@@ -11,7 +14,7 @@ export async function GET(req: NextRequest){
         if(!username || typeof username !== 'string')
             throw new Error("Invalid Username!");
         
-        const userInfo = await User.findOne({ username }).select(['name', 'username', 'followingIds', 'posts']);;
+        const userInfo = await User.findOne({ username }).select(['name', 'username', 'bio', 'image', 'coverImage', 'profileImage', 'emailVerified', 'followingIds', 'posts']);;
 
         if(!userInfo)
             throw new Error("Invalid Username!");

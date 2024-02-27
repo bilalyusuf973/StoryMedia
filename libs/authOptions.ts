@@ -5,7 +5,7 @@ import { AuthOptions } from 'next-auth';
 
 export const authOptions: AuthOptions = {
   pages: {
-    signIn: "/home",
+    signIn: "/login"
   },
   providers: [
       CredentialsProvider({
@@ -18,7 +18,7 @@ export const authOptions: AuthOptions = {
 
           await connectToMongo();
 
-          const user = await User.findOne({email: credentials?.email});
+          const user = await User.findOne({email: credentials?.email}).select(['name', 'username', 'email']);
 
           if(user) return user;
           else return 'null';

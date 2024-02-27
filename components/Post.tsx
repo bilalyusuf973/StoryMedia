@@ -5,6 +5,8 @@ import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
 import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import { Avatar } from '@mui/material'
+import MoreHoriz from '@mui/icons-material/MoreHoriz';
+import UserName from './UserName';
 
 type PostProps = {
   username: string;
@@ -20,10 +22,10 @@ const Post: React.FC<PostProps> = ( {username, body, caption, likedIds, comments
         <div className="postHead flex justify-between items-center px-3 md:px-1 py-2">
           <div className="profileInfo content-center">
               <Avatar alt="" src="" sx={{width:35, height:35, marginRight:1, cursor:'pointer'}}/>
-              <span className='postUsername font-semibold text-sm hover:opacity-[0.5] cursor-pointer'>@{username}</span>
+              <UserName username={username} sx='font-semibold text-sm hover:opacity-[0.7]'/>
               <span className='postTime text-[#747474be] text-sm'>&nbsp;&#x2022;&nbsp;2d</span>
           </div>
-          <div className="postFeatures cursor-pointer font-extrabold text-md hover:opacity-[0.5]">...</div>
+          <div className="postFeatures cursor-pointer hover:opacity-[0.5]"><MoreHoriz/></div>
         </div>
         <div className="postMain">
           <img src="testProfile.jpeg" alt="" className='w-full h-[33rem] md:rounded-md'/>

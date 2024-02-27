@@ -1,18 +1,15 @@
 import { User } from "@/models/model";
 import { NextResponse } from "next/server";
 import connectToMongo from "@/libs/db";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/libs/authOptions";
+import { verifyUser } from "@/middlewares/verifyUser";
 
 export async function GET(){
     try {
+        const { data: user } = await verifyUser();
+        
         await connectToMongo();
 
-        const session = await getServerSession(authOptions);
-        if(!session || !session.user) 
-            throw new Error('Not Signed in!');
-
-        const currentUser = await User.findOne({ email: session.user.email }).select(['name', 'username', 'email', 'bio', 'image', 'coverImage', 'profileImage', 'emailVerified', 'hasNotification', 'followingIds', 'posts', 'messages', 'notifications']);
+        const currentUser = await User.findOne({ email: user.email }).select(['name', 'username', 'email', 'bio', 'image', 'coverImage', 'profileImage', 'emailVerified', 'hasNotification', 'followingIds', 'posts', 'messages', 'notifications']);
         if(!currentUser){
             throw new Error("User does not exist!");
         }

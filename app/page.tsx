@@ -49,7 +49,7 @@ const Homepage = () => {
   }, [session])
   
   return (
-    <div className='w-full h-screen flex'>
+    <div className='w-full h-screen flex overflow-auto'>
       <div className='lg:w-full m-auto p-4 flex flex-col lg:flex-row items-center lg:justify-around'>
         <div className='mr-auto lg:mx-20'>
           <img src="/brandIcon.png" alt="Icon" className='w-[64px] h-[64px] lg:w-[320px] lg:h-[320px]'/>
