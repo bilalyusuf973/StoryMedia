@@ -1,7 +1,7 @@
-<img width="1067" alt="Screenshot 2023-11-27 170534" src="https://github.com/bilalyusuf973/StoryMedia/assets/111658408/41697aa7-e076-416a-b62b-3d832f199cf5">
-<img width="1069" alt="Screenshot 2023-11-27 181244" src="https://github.com/bilalyusuf973/StoryMedia/assets/111658408/b34c31ec-791e-434c-8868-5890c8cee5a7">
-<img width="1068" alt="Screenshot 2023-11-27 181308" src="https://github.com/bilalyusuf973/StoryMedia/assets/111658408/0e3eda0c-6822-4111-b63c-2db0304b44ae">
-<img width="1069" alt="Screenshot 2023-11-27 181332" src="https://github.com/bilalyusuf973/StoryMedia/assets/111658408/d8fd831a-85b6-493b-b927-e83a679c748a">
+![Screenshot 2024-02-27 235403](https://github.com/bilalyusuf973/StoryMedia/assets/111658408/adff486f-b43d-4f41-92e0-afae42b8cd6d)
+![Screenshot 2024-02-27 235240](https://github.com/bilalyusuf973/StoryMedia/assets/111658408/4c31db27-4746-4344-b926-02501f82a146)
+![Screenshot 2024-02-27 235319](https://github.com/bilalyusuf973/StoryMedia/assets/111658408/a93947b9-a198-45d7-9905-0e63c66dc0d5)
+![Screenshot 2024-02-27 235302](https://github.com/bilalyusuf973/StoryMedia/assets/111658408/ba027601-8557-4c7b-9a50-d00242aa734f)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
