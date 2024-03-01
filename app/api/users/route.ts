@@ -9,7 +9,7 @@ export async function GET() {
 
         await connectToMongo();
 
-        const users = await User.find().sort({ createdAt: -1 });
+        const users = await User.find().select(['-_id', '-email', '-hashedPassword', '-hasNotification', '-messages', '-notifications', '-updatedAt', '-__v']).sort({ createdAt: -1 });
         
         return NextResponse.json({ status: 200, users }, { status: 200 });
     } catch (error) {
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
                 { "name": { $regex: query, $options: "i" } }, // Search by name (case-insensitive)
                 { "username": { $regex: query, $options: "i" } } // Search by username (case-insensitive)
             ]
-        });
+        }).select(['-_id', '-email', '-hashedPassword', '-hasNotification', '-messages', '-notifications', '-updatedAt', '-__v']);
 
         if(users.length === 0)
             throw new Error('User Not found!');

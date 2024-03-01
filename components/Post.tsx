@@ -4,26 +4,31 @@ import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
 import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
-import { Avatar } from '@mui/material'
+import Image from 'next/image'
 import MoreHoriz from '@mui/icons-material/MoreHoriz';
 import UserName from './UserName';
 
 type PostProps = {
   username: string;
   body: string;
+  image?: string;
   caption?: string;
   likedIds?: string[];
   comments?: string[];
 }
 
-const Post: React.FC<PostProps> = ( {username, body, caption, likedIds, comments} ) => {
+const Post: React.FC<PostProps> = ( {username, body, image, caption, likedIds, comments} ) => {
   return (
     <div className='postDiv mt-1 mb-2 border-b-[1px] border-gray-500'>
         <div className="postHead flex justify-between items-center px-3 md:px-1 py-2">
-          <div className="profileInfo content-center">
-              <Avatar alt="" src="" sx={{width:35, height:35, marginRight:1, cursor:'pointer'}}/>
+          <div className="profileInfo content-center gap-1">
+              <Image src={image || '/avatarImage.png'} alt='Avatar' width={35} height={35} style={{
+                objectFit: 'cover',
+                borderRadius: '100%',
+                cursor: 'pointer'
+              }}/>
               <UserName username={username} sx='font-semibold text-sm hover:opacity-[0.7]'/>
-              <span className='postTime text-[#747474be] text-sm'>&nbsp;&#x2022;&nbsp;2d</span>
+              <span className='postTime text-[#747474be] text-sm'>&#x2022; 2d</span>
           </div>
           <div className="postFeatures cursor-pointer hover:opacity-[0.5]"><MoreHoriz/></div>
         </div>

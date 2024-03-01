@@ -33,7 +33,7 @@ export default function LeftBar() {
   ];
 
   return (
-    <div className="hidden md:flex flex-col justify-between dark:bg-black sticky top-0 h-screen">
+    <div className="hidden md:flex flex-col justify-between dark:bg-black sticky top-0 gap-2 h-screen overflow-auto">
       <div className='flex flex-col pt-[90px] xl:ml-[6vw] xl:mr-[3vw] gap-y-[5px]'>
         {menuItemsData.map(({ icon, label, onClick }, index) => {
           return <MenuItem key={index} icon={icon} label={label} onClick={onClick}/>

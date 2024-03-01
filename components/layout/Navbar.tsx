@@ -22,7 +22,7 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
-import { Avatar } from '@mui/material';
+import Image from 'next/image';
 import useCurrentUser from '@/hooks/useCurrentUser';
 import axios from 'axios';
 
@@ -52,7 +52,10 @@ export default function Navbar() {
     { icon: <SendOutlinedIcon sx={{ fontSize: 30 }} className='-rotate-[30deg]'/>, label: 'Messages'},
     { icon: <FavoriteBorderOutlinedIcon sx={{ fontSize: 32 }}/>, label: 'Notifications'},
     { icon: <AddCircleOutlineOutlinedIcon sx={{ fontSize: 32 }}/>, label: 'Create'},
-    { icon: <Avatar alt="Avatar" src="" sx={{width:35, height:35}}/>, label: data?.currentUser?.name, onClick: () => router.push('/view/profile')},
+    { icon: <Image src={'/avatarImage.png'} alt='Avatar' width={35} height={35} style={{
+      objectFit: 'cover',
+      borderRadius: '100%',
+    }}/>, label: data?.currentUser?.name, onClick: () => router.push('/view/profile')},
     { icon: <LogoutOutlinedIcon sx={{ fontSize: 32 }}/>, label: 'Logout', onClick: () => signOut({callbackUrl: "/", redirect: true})},
   ]
 

@@ -14,14 +14,12 @@ export async function GET(req: NextRequest){
         if(!username || typeof username !== 'string')
             throw new Error("Invalid Username!");
         
-        const userInfo = await User.findOne({ username }).select(['name', 'username', 'bio', 'image', 'coverImage', 'profileImage', 'emailVerified', 'followingIds', 'posts']);;
+        const user = await User.findOne({ username }).select(['-_id', '-email', '-hashedPassword', '-hasNotification', '-messages', '-notifications', '-updatedAt', '-__v']);;
 
-        if(!userInfo)
+        if(!user)
             throw new Error("Invalid Username!");
-
-        const followersCount = await User.find({ followingIds: { _id: userInfo._id } }).countDocuments();
   
-        return NextResponse.json({ status: 200, user: {userInfo, followersCount} }, { status: 200 });
+        return NextResponse.json({ status: 200, user }, { status: 200 });
     } catch (error) {
         return NextResponse.json({ status: 400, error }, { status: 400 });
     }

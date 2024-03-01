@@ -9,7 +9,7 @@ export async function GET(){
         
         await connectToMongo();
 
-        const currentUser = await User.findOne({ email: user.email }).select(['name', 'username', 'email', 'bio', 'image', 'coverImage', 'profileImage', 'emailVerified', 'hasNotification', 'followingIds', 'posts', 'messages', 'notifications']);
+        const currentUser = await User.findOne({ email: user.email }).select(['-hashedPassword', '-_id', '-__v', '-updatedAt']);
         if(!currentUser){
             throw new Error("User does not exist!");
         }

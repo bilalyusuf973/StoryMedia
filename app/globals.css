@@ -23,6 +23,10 @@ body{
     user-select: none;
 }
 
+.dark{
+    scrollbar-color: #686868 #424242;
+}
+
 .navbar{
     box-shadow: var(--shadow);
 }
