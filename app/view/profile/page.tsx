@@ -16,9 +16,13 @@ import { CircularProgress } from '@mui/material'
 import Image from 'next/image'
 
 import useCurrentUser from '@/hooks/useCurrentUser'
+import SearchedUsers from '@/components/layout/SearchedUsers'
 
 export default function ProfileView() {
     const { data, isLoading } = useCurrentUser();
+  
+    // const isFollowing = user.followersIds.includes(currentUserId);
+    // const isFollowing = false;
 
   return (
     <GlobalLayout>
@@ -44,7 +48,16 @@ export default function ProfileView() {
                 <Name name={data.currentUser.name} sx='text-[18px] leading-[22px]'/>
                 <UserName username={data.currentUser.username} sx='text-neutral-500 text-[15px]'/>
               </div>
-              <div></div>
+              <div className='flex justify-start px-2 py-4 gap-5'>
+                <div className='flex items-center flex-col text-neutral-500'>
+                  <div className='font-bold text-[25px]'>{data.currentUser.followersIds.length}</div>
+                  <div>Followers</div>
+                </div>
+                <div className='flex items-center flex-col text-neutral-500'>
+                  <div className='font-bold text-[25px]'>{data.currentUser.followingIds.length}</div>
+                  <div>Following</div>
+                </div>
+              </div>
             </div>
           </div>
           <nav></nav>
@@ -53,8 +66,8 @@ export default function ProfileView() {
       </MiddleBar>
 
       <RightBar>
-        <></>
+        <SearchedUsers/>
       </RightBar>
     </GlobalLayout>
   )
-}
+};

@@ -1,13 +1,10 @@
 import { User } from "@/models/model";
-import connectToMongo from "@/libs/db";
 import { NextRequest, NextResponse } from "next/server";
 import { verifyUser } from "@/middlewares/verifyUser";
 
 export async function GET() {
     try {
         await verifyUser();
-
-        await connectToMongo();
 
         const users = await User.find().select(['-_id', '-email', '-hashedPassword', '-hasNotification', '-messages', '-notifications', '-updatedAt', '-__v']).sort({ createdAt: -1 });
         
@@ -22,8 +19,6 @@ export async function POST(req: NextRequest) {
         await verifyUser();
 
         const { searchQuery: query } = await req.json();
-        
-        await connectToMongo();
 
         const users = await User.find({
             $or: [

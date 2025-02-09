@@ -52,7 +52,13 @@ const UserSchema = new Schema({
         type: String,
         required: [true, 'Username is required!'],
         unique: true,
-        trim: true
+        trim: true,
+        validate: {
+            validator: function(value: string) {
+              return /^[A-Za-z_][A-Za-z0-9._]{4,29}$/.test(value);
+            },
+            message: 'The username field format is invalid'
+        }
     },
     bio: String,
     email: {
@@ -72,10 +78,7 @@ const UserSchema = new Schema({
         required: [true, 'Password is required!']
     },
     followingIds: [Schema.Types.ObjectId],
-    followersIds: [{
-        name: String,
-        username: String,
-    }],
+    followersIds: [Schema.Types.ObjectId],
     hasNotification: Boolean,
 
     posts: [PostSchema],

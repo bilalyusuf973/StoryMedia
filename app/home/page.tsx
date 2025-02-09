@@ -4,6 +4,8 @@ import RightBar from '@/components/layout/RightBar'
 import Stories from '@/components/Stories'
 import Thoughts from '@/components/Thoughts'
 import Posts from '@/components/Posts'
+import SearchedUsers from '@/components/layout/SearchedUsers'
+
 
 
 export default function Home() {
@@ -16,7 +18,7 @@ export default function Home() {
       </MiddleBar>
 
       <RightBar>
-        <></>
+        <SearchedUsers/>
       </RightBar>
     </GlobalLayout>
   )

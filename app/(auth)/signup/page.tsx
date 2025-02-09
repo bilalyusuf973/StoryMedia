@@ -10,7 +10,7 @@ import axios from 'axios';
 import { signIn } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 
-const Register = () => {
+const Register: React.FC = () => {
   const router = useRouter();
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -20,14 +20,12 @@ const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const closeRegisterPage = () => {
-    if(isLoading)
-      return;
-
+    if (isLoading) return;
     router.push('/');
   }
 
   const handleSubmit = async () => {
-    if(isLoading) return;
+    if (isLoading) return;
     try {
       setIsLoading(true);
 
@@ -37,7 +35,7 @@ const Register = () => {
       const res = await axios.post('/api/auth/register', { name, username, email, password, password_confirmation });
       const data = await res.data;
 
-      if(data.status === 200){
+      if (data.status === 200) {
         await signIn("credentials", {
           email: email,
           password: password,
@@ -45,12 +43,13 @@ const Register = () => {
           redirect: true
         });
         toast.success(data.message);
-      }else if(data.status === 400){
+      } else if (data.status === 400) {
         toast.error(data.error);
       }
     } catch (error) {
-      console.log(error);
-    }finally{
+      toast.error("An error occurred while registering.");
+      console.error(error);
+    } finally {
       setIsLoading(false);
     }
   }
@@ -78,8 +77,8 @@ const Register = () => {
 
   return (
     <>
-      <Modal onClose={closeRegisterPage} onSubmit={handleSubmit} title={title} body={body} actionLabel='Create Account' footer={footer} disabled={false}/>
-      <Homepage/>
+      <Modal onClose={closeRegisterPage} onSubmit={handleSubmit} title={title} body={body} actionLabel='Create Account' footer={footer} disabled={isLoading} />
+      <Homepage />
     </>
   )
 }

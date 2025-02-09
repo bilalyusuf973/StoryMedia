@@ -12,8 +12,8 @@ import UserName from '../UserName';
 
 const LeftBarProfileSection = () => {
   const [showLogout, setShowLogout] = useState(false);
-  const { data, isLoading }  = useCurrentUser();
-  
+  const { data, isLoading } = useCurrentUser();
+
   return (
     <>
         {!isLoading && data?.currentUser && <div className="profileSection hidden text-[15px] xl:flex ml-[6vw] m-3 p-2 cursor-pointer rounded-[20px] hover:bg-[#d5d5d5] dark:hover:bg-[#1c1c1c]" onClick={() => setShowLogout(prev => !prev)}>

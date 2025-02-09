@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 
 import { ThemeContextProvider } from '@/app/contexts/ThemeContext'
 import { ModalContextProvider } from './contexts/ModalContext'
+import { SearchedUsersContextProvider } from './contexts/SearchedUsersContext'
 
 import Sessionprovider from '@/authProvider/SessionProvider'
 import { Toaster } from 'react-hot-toast'
@@ -25,11 +26,13 @@ export default function RootLayout({
         <body className={inter.className + " " + 'dark:bg-black dark:text-white min-h-screen'}>
           <Sessionprovider>
             <Toaster position='top-center' reverseOrder={false}/>
+            <SearchedUsersContextProvider>
             <ThemeContextProvider>
               <ModalContextProvider>
               {children}
               </ModalContextProvider>
             </ThemeContextProvider>
+            </SearchedUsersContextProvider>
           </Sessionprovider>
         </body>
     </html>

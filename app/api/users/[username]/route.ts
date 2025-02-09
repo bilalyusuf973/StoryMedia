@@ -1,13 +1,10 @@
 import { User } from "@/models/model";
-import connectToMongo from "@/libs/db";
 import { NextRequest, NextResponse } from "next/server";
 import { verifyUser } from "@/middlewares/verifyUser";
 
 export async function GET(req: NextRequest){
     try {
         await verifyUser();
-        
-        await connectToMongo();
 
         const username = req.url.split("users/")[1];
 

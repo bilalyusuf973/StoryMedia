@@ -10,28 +10,26 @@ import axios from 'axios';
 import { signIn } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 
-const Login = () => {
+const Login: React.FC = () => {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const closeLoginPage = () => {
-    if(isLoading)
-      return;
-
+    if (isLoading) return;
     router.push('/');
   }
 
   const handleSubmit = async () => {
-    if(isLoading) return;
+    if (isLoading) return;
     try {
       setIsLoading(true);
 
       const res = await axios.post('/api/auth/login', { email, password });
       const data = await res.data;
 
-      if(data.status === 200){
+      if (data.status === 200) {
         await signIn("credentials", {
           email: email,
           password: password,
@@ -39,15 +37,15 @@ const Login = () => {
           redirect: true
         });
         toast.success(data.message);
-      }else if(data.status === 400){
+      } else if (data.status === 400) {
         toast.error(data.error);
       }
     } catch (error) {
-      console.log(error);
-    }finally{
+      toast.error("An error occurred while logging in.");
+      console.error(error);
+    } finally {
       setIsLoading(false);
     }
-
   }
 
   const title = (
@@ -56,8 +54,8 @@ const Login = () => {
 
   const body = (
     <>
-      <Input type='email' name='email' placeholder='Email Address' value={email} onChange={e => setEmail(e.target.value)}/>
-      <Input type='password' name='password' placeholder='Password' value={password} onChange={e => setPassword(e.target.value)}/>
+      <Input type='email' name='email' placeholder='Email Address' value={email} onChange={e => setEmail(e.target.value)} />
+      <Input type='password' name='password' placeholder='Password' value={password} onChange={e => setPassword(e.target.value)} />
     </>
   );
 
@@ -73,8 +71,8 @@ const Login = () => {
 
   return (
     <>
-      <Modal onClose={closeLoginPage} onSubmit={handleSubmit} title={title} body={body} actionLabel='Next' footer={footer} disabled={false}/>
-      <Homepage/>
+      <Modal onClose={closeLoginPage} onSubmit={handleSubmit} title={title} body={body} actionLabel='Next' footer={footer} disabled={isLoading} />
+      <Homepage />
     </>
   )
 }
