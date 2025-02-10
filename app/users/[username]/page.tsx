@@ -70,11 +70,11 @@ export default function UserView() {
                 </div>
                 <div className='flex justify-start px-2 py-4 gap-5'>
                   <div className='flex items-center flex-col text-neutral-500'>
-                    <div className='font-bold text-[25px]'>{userData.user.followersIds.length}</div>
+                    <div className='font-bold text-[21px]'>{userData.user.followersIds.length}</div>
                     <div>Followers</div>
                   </div>
                   <div className='flex items-center flex-col text-neutral-500'>
-                    <div className='font-bold text-[25px]'>{userData.user.followingIds.length}</div>
+                    <div className='font-bold text-[21px]'>{userData.user.followingIds.length}</div>
                     <div>Following</div>
                   </div>
                 </div>

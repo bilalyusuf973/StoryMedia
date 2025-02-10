@@ -37,30 +37,30 @@ export default function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
   const { setSearchedUsers } = useSearchedUsersContext();
   const [isLoading, setIsLoading] = useState(false);
-  const [showSearchedUsers, setShowSearchedUsers] = useState(false);
-  const searchRef = useRef<HTMLDivElement>(null);
+  // const [showSearchedUsers, setShowSearchedUsers] = useState(false);
+  // const searchRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (searchQuery === "") setSearchedUsers([]);
   }, [searchQuery]);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-        setShowSearchedUsers(false);
-      }
-    };
+  // useEffect(() => {
+  //   const handleClickOutside = (event: MouseEvent) => {
+  //     if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+  //       setShowSearchedUsers(false);
+  //     }
+  //   };
 
-    if (showNavMenu) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
+  //   if (showNavMenu) {
+  //     document.addEventListener("mousedown", handleClickOutside);
+  //   } else {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   }
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [showNavMenu]);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, [showNavMenu]);
 
   const handleSearch = async () => {
     if (isLoading) return;
@@ -74,12 +74,16 @@ export default function Navbar() {
       const data = await res.data;
       const users = data?.users;
       setSearchedUsers(users);
-      setShowSearchedUsers(true);
+      // setShowSearchedUsers(true);
     } catch (error) {
       console.log(error);
     } finally {
       setIsLoading(false);
     }
+  }
+
+  const clearSearch = () => {
+    setSearchQuery("");
   }
 
   const navbarMenuItemsData = [
@@ -106,13 +110,16 @@ export default function Navbar() {
             </div>
           </div>
           <div className='w-full min-w-[280px] mt-14 px-3 py-5 flex flex-col dark:bg-black gap-3'>
-            <div ref={searchRef} className="mb-2 h-[50px] flex rounded-full border border-neutral-500">
-              <input type="text" name='searchBar' autoComplete='off' className='indent-5 w-[85%] rounded-tl-full rounded-bl-full border-r border-neutral-500 dark:bg-black outline-none text-xl' placeholder='Search...' onChange={e => setSearchQuery(e.target.value)} />
+            <div className="mb-2 h-[50px] flex rounded-full border border-neutral-500">
+              <input type="text" value={searchQuery} name='searchBar' autoComplete='off' className='indent-5 w-[85%] rounded-tl-full rounded-bl-full dark:bg-black outline-none text-xl' placeholder='Search...' onChange={e => setSearchQuery(e.target.value)} />
+              <div className='h-full outline-none w-[40px] content-center px-1 border-r border-neutral-500'>
+                {searchQuery && <CloseIcon className='cursor-pointer dark:hover:text-neutral-400 hover:text-neutral-500' onClick={clearSearch}/>}
+              </div>
               <div className='w-[15%] rounded-tr-full rounded-br-full content-center bg-[#d5d5d5] dark:bg-[#1c1c1c]' onClick={handleSearch}>
                 <SearchRoundedIcon sx={{ fontSize: 30 }} className='cursor-pointer ml-1 mr-1' />
               </div>
             </div>
-            {showSearchedUsers && <SearchedUsers />}
+            <SearchedUsers />
             {navbarMenuItemsData.map(({ icon, label, onClick }, index) => {
               return <NavbarMenuItem key={index} icon={icon} onClick={onClick} label={label} />
             })}
@@ -134,7 +141,10 @@ export default function Navbar() {
 
             <div className='right content-center gap-2'>
               <div className="h-10 rounded-full border border-neutral-500 justify-center items-center hidden md:flex">
-                <input type="text" name='searchBar' autoComplete='off' className='h-full indent-5 rounded-tl-full rounded-bl-full outline-none w-[25vw] dark:bg-black border-r border-neutral-500' placeholder='Search...' onChange={e => setSearchQuery(e.target.value)} />
+                <input type="text" value={searchQuery} name='searchBar' autoComplete='off' className='h-full indent-5 rounded-tl-full rounded-bl-full outline-none w-[20vw] dark:bg-black' placeholder='Search...' onChange={e => setSearchQuery(e.target.value)} />
+                <div className='h-full outline-none w-[40px] content-center px-1 border-r border-neutral-500'>
+                  {searchQuery && <CloseIcon className='cursor-pointer dark:hover:text-neutral-400 hover:text-neutral-500' onClick={clearSearch}/>}
+                </div>
                 <div className='h-full rounded-tr-full rounded-br-full px-[12px] content-center bg-[#d5d5d5] dark:bg-[#1c1c1c] hover:bg-neutral-400 dark:hover:bg-neutral-800' onClick={handleSearch}><SearchRoundedIcon sx={{ fontSize: 30 }} className='cursor-pointer' /></div>
               </div>
 

@@ -65,7 +65,7 @@ const FollowButton: React.FC<FollowButtonProps> = ({ username }) => {
   return (
     <button
       onClick={handleFollow}
-      className={`px-4 py-2 text-white font-bold rounded-full ${
+      className={`px-4 py-2 text-white text-[14px] font-bold rounded-full ${
         isFollowing ? "bg-red-500 hover:bg-red-600" : "bg-blue-500 hover:bg-blue-600"
       }`}
       disabled={isLoading}
